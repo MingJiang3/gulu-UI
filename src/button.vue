@@ -1,7 +1,9 @@
 <template>
     <button class="g-button" :class="{[`icon-${iconPosition}`]:true}"><!--iconPosition的值为变量 -->
-        <g-icon v-if="icon" :name="icon"></g-icon>
-        <div clagss="content">
+        <g-icon class="icon" v-if="icon" :name="icon"></g-icon>
+        <g-icon class="loading" name="loading"></g-icon>
+
+        <div class="content">
             <slot></slot>
         </div>
     </button></template>
@@ -11,16 +13,20 @@ export default {
     props:{
         icon:{},
         iconPosition:{
-            type:String,
-            default:'left',
-            validator(value){
-                return !(value !== 'right' && value !== 'left');
+            type: String,
+            default: 'left',
+            validator (value) {
+                return value === 'left' || value === 'right'
             }
         }
     }
 }
 </script>
 <style lang="scss">
+    @keyframes spin {
+        0%{transform: rotate(0deg)}
+        100%{transform: rotate(360deg)}
+    }
     .g-button{
         font-size: var(--font-size);
         height: var(--button-height);
@@ -34,12 +40,16 @@ export default {
         vertical-align: middle;
         &:hover{border-color: var(--border-color-hover)}
         &:active{background-color: var(--button-active-bg)}
-        &:focus{outline: none}
-        > .icon{order: 1; margin-right: .1em;}
-        > .content{order: 2;}
-        &.icon-right{
-            > .icon{order: 2; margin-right: 0; margin-left: .1em}
-            > .content{order: 1;}
+        &:focus { outline: none; }
+        > .content { order: 2; }
+        > .icon { order: 1; margin-right: .2em; }
+        &.icon-right {
+            > .content { order: 1; }
+            > .icon { order: 2; margin-right: 0; margin-left: .2em;}
         }
+        .loading {
+            animation: spin 2s infinite linear;
+        }
+
     }
 </style>
