@@ -1,9 +1,7 @@
 <template>
     <button class="g-button" :class="{[`icon-${iconPosition}`]:true}"><!--iconPosition的值为变量 -->
-        <svg v-if="icon" class="icon">
-            <use :xlink:href="`#i-${icon}`"></use>
-        </svg>
-        <div class="content">
+        <g-icon v-if="icon" :name="icon"></g-icon>
+        <div clagss="content">
             <slot></slot>
         </div>
     </button></template>
