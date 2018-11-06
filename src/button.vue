@@ -1,7 +1,7 @@
 <template>
-    <button class="g-button" :class="{[`icon-${iconPosition}`]:true}"><!--iconPosition的值为变量 -->
-        <g-icon class="icon" v-if="icon" :name="icon"></g-icon>
-        <g-icon class="loading" name="loading"></g-icon>
+    <button class="g-button" :class="{[`icon-${iconPosition}`]:true}" @click="$emit('click')"><!--iconPosition的值为变量 -->
+        <g-icon class="icon" v-if="icon && !loading" :name="icon"></g-icon>
+        <g-icon class="loading icon" v-if="loading" name="loading"></g-icon>
 
         <div class="content">
             <slot></slot>
@@ -12,6 +12,10 @@ export default {
     // props:['icon','iconPosition']
     props:{
         icon:{},
+        loading:{
+            type:Boolean,
+            default: false
+        },
         iconPosition:{
             type: String,
             default: 'left',
@@ -22,7 +26,7 @@ export default {
     }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
     @keyframes spin {
         0%{transform: rotate(0deg)}
         100%{transform: rotate(360deg)}
@@ -47,9 +51,6 @@ export default {
             > .content { order: 1; }
             > .icon { order: 2; margin-right: 0; margin-left: .2em;}
         }
-        .loading {
-            animation: spin 2s infinite linear;
-        }
-
+        .loading {animation: spin 2s infinite linear;}
     }
 </style>
