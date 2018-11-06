@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/MingJiang3/gulu-UI/issues"
   },
-  "homepage": "https://github.com/MingJiang3/gulu-UI#readme"
+  "homepage": "https://github.com/MingJiang3/gulu-UI#readme",
+  "dependencies": {
+    "vue": "^2.5.17"
+  }
 }
