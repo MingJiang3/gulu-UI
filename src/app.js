@@ -22,13 +22,13 @@ chai.use(spies)
 const expect  = chai.expect
 //单元测试
 {
-    const Constructor = Vue.extend(Button)      //把butto组件变成构造函数
+    const Constructor = Vue.extend(Button)      //把butto组件变成构造函数，Button就是对象
     const vm = new Constructor({                //构造函数变成实例
         propsData:{
             icon:'set'
         }
     })
-    vm.$mount()                                  //实例挂载(括号里写挂载在到的位置)
+    vm.$mount()                                  //实例挂载(括号里写挂载在到的位置)挂载到内存
     let userElement = vm.$el.querySelector('use')
     let href = userElement.getAttribute('xlink:href')
     expect(href).to.eq('#i-set')
