@@ -1,8 +1,9 @@
 language: node_js
 node_js:
-  - "8"
+  - "8"       #版本，可同时测试三种版本
 addons:
   chrome: stable
+# 苹果用户输入下面四行
 #sudo: required
 #before_script:
 #  - "sodu chown root /opt/google/chrome/chrome-sandbox"
