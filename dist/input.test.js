@@ -11682,83 +11682,24 @@ describe('Input', function () {
     var vm;
     afterEach(function () {
       vm.$destroy();
-    }); // it('支持 change/input/focus/blur 事件', () => {
-    //     ['change', 'input', 'focus', 'blur'].forEach((eventName) => {
-    //         vm = new Constructor({}).$mount()
-    //         const callback = sinon.fake();
-    //         vm.$on('eventName', callback)
-    //         //触发input的change事件
-    //         let event = new Event('eventName');
-    //         Object.defineProperty(event,'target',{value:{value:'hi'},enumerable:true})                
-    //         let inputElement = vm.$el.querySelector('input')
-    //         inputElement.dispatchEvent(event)
-    //         expect(callback).to.have.been.calledWith('hi')
-    //     })
-    // })
-
-    it('支持 change 事件', function () {
-      vm = new Constructor({}).$mount();
-      var callback = sinon.fake();
-      vm.$on('change', callback); //触发input的change事件
-
-      var event = new Event('change');
-      Object.defineProperty(event, 'target', {
-        value: {
-          value: 'hi'
-        },
-        enumerable: true
-      });
-      var inputElement = vm.$el.querySelector('input');
-      inputElement.dispatchEvent(event);
-      expect(callback).to.have.been.calledWith('hi');
     });
-    it('支持 input 事件', function () {
-      vm = new Constructor({}).$mount();
-      var callback = sinon.fake();
-      vm.$on('input', callback); //触发input的change事件
+    it('支持 change/input/focus/blur 事件', function () {
+      ['change', 'input', 'focus', 'blur'].forEach(function (eventName) {
+        vm = new Constructor({}).$mount();
+        var callback = sinon.fake();
+        vm.$on(eventName, callback); //触发input的change 事件
 
-      var event = new Event('input');
-      Object.defineProperty(event, 'target', {
-        value: {
-          value: 'hi'
-        },
-        enumerable: true
+        var event = new Event(eventName);
+        Object.defineProperty(event, 'target', {
+          value: {
+            value: 'hi'
+          },
+          enumerable: true
+        });
+        var inputElement = vm.$el.querySelector('input');
+        inputElement.dispatchEvent(event);
+        expect(callback).to.have.been.calledWith('hi');
       });
-      var inputElement = vm.$el.querySelector('input');
-      inputElement.dispatchEvent(event);
-      expect(callback).to.have.been.calledWith('hi');
-    });
-    it('支持 focus 事件', function () {
-      vm = new Constructor({}).$mount();
-      var callback = sinon.fake();
-      vm.$on('focus', callback); //触发input的change事件
-
-      var event = new Event('focus');
-      Object.defineProperty(event, 'target', {
-        value: {
-          value: 'hi'
-        },
-        enumerable: true
-      });
-      var inputElement = vm.$el.querySelector('input');
-      inputElement.dispatchEvent(event);
-      expect(callback).to.have.been.calledWith('hi');
-    });
-    it('支持 blur 事件', function () {
-      vm = new Constructor({}).$mount();
-      var callback = sinon.fake();
-      vm.$on('blur', callback); //触发input的change事件
-
-      var event = new Event('blur');
-      Object.defineProperty(event, 'target', {
-        value: {
-          value: 'hi'
-        },
-        enumerable: true
-      });
-      var inputElement = vm.$el.querySelector('input');
-      inputElement.dispatchEvent(event);
-      expect(callback).to.have.been.calledWith('hi');
     });
   });
 });
