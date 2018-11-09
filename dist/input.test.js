@@ -11554,16 +11554,16 @@ exports.default = _default;
         domProps: { value: _vm.value },
         on: {
           change: function($event) {
-            _vm.$emit("change", $event, "4444")
+            _vm.$emit("change", $event.target.value)
           },
           input: function($event) {
-            _vm.$emit("input", $event)
+            _vm.$emit("input", $event.target.value)
           },
           focus: function($event) {
-            _vm.$emit("focus", $event)
+            _vm.$emit("focus", $event.target.value)
           },
           blur: function($event) {
-            _vm.$emit("blur", $event)
+            _vm.$emit("blur", $event.target.value)
           }
         }
       }),
@@ -11647,8 +11647,6 @@ describe('Input', function () {
       expect(inputElement.value).to.equal('1234');
     });
     it('接收 disabled', function () {
-      var Constructor = _vue.default.extend(_input.default);
-
       vm = new Constructor({
         propsData: {
           disabled: true
@@ -11658,8 +11656,6 @@ describe('Input', function () {
       expect(inputElement.disabled).to.equal(true);
     });
     it('接收 readonly', function () {
-      var Constructor = _vue.default.extend(_input.default);
-
       vm = new Constructor({
         propsData: {
           readonly: true
@@ -11669,8 +11665,6 @@ describe('Input', function () {
       expect(inputElement.readOnly).to.equal(true);
     });
     it('接收 error', function () {
-      var Constructor = _vue.default.extend(_input.default);
-
       vm = new Constructor({
         propsData: {
           error: 'you error'
@@ -11696,9 +11690,15 @@ describe('Input', function () {
         vm.$on('eventName', callback); //触发input的change事件
 
         var event = new Event('eventName');
+        Object.defineProperty(event, 'target', {
+          value: {
+            value: 'hi'
+          },
+          enumerable: true
+        });
         var inputElement = vm.$el.querySelector('input');
         inputElement.dispatchEvent(event);
-        expect(callback).to.have.been.calledWith(event);
+        expect(callback).to.have.been.calledWith('hi');
       });
     });
   });
@@ -11730,7 +11730,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49987" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52160" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

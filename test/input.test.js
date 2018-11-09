@@ -27,7 +27,6 @@ describe('Input', () => {
         })
 
         it('接收 disabled', () => {
-            const Constructor = Vue.extend(Input)
             vm = new Constructor({
                 propsData: {
                     disabled: true
@@ -38,7 +37,6 @@ describe('Input', () => {
         })
 
         it('接收 readonly', () => {
-            const Constructor = Vue.extend(Input)
             vm = new Constructor({
                 propsData: {
                     readonly: true
@@ -48,7 +46,6 @@ describe('Input', () => {
             expect(inputElement.readOnly).to.equal(true)
         })
         it('接收 error', () => {
-            const Constructor = Vue.extend(Input)
             vm = new Constructor({
                 propsData: {
                     error: 'you error'
@@ -74,9 +71,10 @@ describe('Input', () => {
                 vm.$on('eventName', callback)
                 //触发input的change事件
                 let event = new Event('eventName');
+                Object.defineProperty(event,'target',{value:{value:'hi'},enumerable:true})                
                 let inputElement = vm.$el.querySelector('input')
                 inputElement.dispatchEvent(event)
-                expect(callback).to.have.been.calledWith(event)
+                expect(callback).to.have.been.calledWith('hi')
             })
         })
 

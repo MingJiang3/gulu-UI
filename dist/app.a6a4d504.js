@@ -11761,16 +11761,16 @@ exports.default = _default;
         domProps: { value: _vm.value },
         on: {
           change: function($event) {
-            _vm.$emit("change", $event, "4444")
+            _vm.$emit("change", $event.target.value)
           },
           input: function($event) {
-            _vm.$emit("input", $event)
+            _vm.$emit("input", $event.target.value)
           },
           focus: function($event) {
-            _vm.$emit("focus", $event)
+            _vm.$emit("focus", $event.target.value)
           },
           blur: function($event) {
-            _vm.$emit("blur", $event)
+            _vm.$emit("blur", $event.target.value)
           }
         }
       }),
@@ -11849,18 +11849,8 @@ new _vue.default({
   data: {
     loading1: false,
     loading2: true,
-    loading3: false
-  },
-  created: function created() {
-    var _this = this;
-
-    setTimeout(function () {
-      var event = new Event('eventName');
-
-      var inputElement = _this.$el.querySelector('input');
-
-      inputElement.dispatchEvent(event);
-    }, 2000);
+    loading3: false,
+    message: 'hi'
   },
   methods: {
     inputChange: function inputChange(e) {
@@ -11895,7 +11885,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51380" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58839" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
