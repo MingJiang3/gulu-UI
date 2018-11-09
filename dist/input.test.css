@@ -1,0 +1,48 @@
+
+.g-icon[data-v-8caed4] {
+  width: 1em;
+  height: 1em;
+}
+.wraper[data-v-befeb9] {
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+}
+.wraper > *[data-v-befeb9] {
+  margin-right: 0.5em;
+}
+.wraper > *[data-v-befeb9]:last-child {
+  margin-right: 0;
+}
+.wraper > input[data-v-befeb9] {
+  height: 32px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  padding: 0 8px;
+  font-size: inherit;
+}
+.wraper > input[data-v-befeb9]:hover {
+  border-color: #666;
+}
+.wraper > input[data-v-befeb9]:focus {
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+  outline: none;
+}
+.wraper > input[disabled][data-v-befeb9] {
+  border-color: #ccc;
+  color: #ccc;
+  cursor: not-allowed;
+}
+.wraper > input[readonly][data-v-befeb9] {
+  border-color: #aaa;
+  color: #aaa;
+}
+.wraper.error > input[data-v-befeb9] {
+  border-color: #f14530;
+}
+.wraper .icon-error[data-v-befeb9] {
+  fill: #f14530;
+}
+.wraper .error-message[data-v-befeb9] {
+  color: #f14530;
+}

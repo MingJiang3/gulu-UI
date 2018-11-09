@@ -11715,6 +11715,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
 var _default = {
   components: {
     Icon: _icon.default
@@ -11755,14 +11758,28 @@ exports.default = _default;
     [
       _c("input", {
         attrs: { type: "text", disabled: _vm.disabled, readonly: _vm.readonly },
-        domProps: { value: _vm.value }
+        domProps: { value: _vm.value },
+        on: {
+          change: function($event) {
+            _vm.$emit("change", $event, "4444")
+          },
+          input: function($event) {
+            _vm.$emit("input", $event)
+          },
+          focus: function($event) {
+            _vm.$emit("focus", $event)
+          },
+          blur: function($event) {
+            _vm.$emit("blur", $event)
+          }
+        }
       }),
       _vm._v(" "),
       _vm.error
         ? [
             _c("icon", { staticClass: "icon-error", attrs: { name: "error" } }),
             _vm._v(" "),
-            _c("span", { staticClass: "error-message" }, [
+            _c("span", { staticClass: "errorMessage" }, [
               _vm._v(_vm._s(_vm.error))
             ])
           ]
@@ -11833,6 +11850,22 @@ new _vue.default({
     loading1: false,
     loading2: true,
     loading3: false
+  },
+  created: function created() {
+    var _this = this;
+
+    setTimeout(function () {
+      var event = new Event('eventName');
+
+      var inputElement = _this.$el.querySelector('input');
+
+      inputElement.dispatchEvent(event);
+    }, 2000);
+  },
+  methods: {
+    inputChange: function inputChange(e) {
+      console.log(e);
+    }
   }
 });
 },{"vue":"node_modules/vue/dist/vue.common.js","./button":"src/button.vue","./icon":"src/icon.vue","./buttonGroup":"src/buttonGroup.vue","./input":"src/input.vue"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -11862,7 +11895,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50114" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51380" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
