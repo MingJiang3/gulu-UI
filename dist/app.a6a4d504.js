@@ -11822,7 +11822,27 @@ render._withStripped = true
       }
     })();
 },{"./icon":"src/icon.vue","_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.common.js"}],"src/row.vue":[function(require,module,exports) {
+"use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//
+//
+//
+//
+//
+//
+var _default = {
+  name: 'guluRow',
+  props: {
+    gutter: {
+      type: [Number, String]
+    }
+  }
+};
+exports.default = _default;
         var $534dcb = exports.default || module.exports;
       
       if (typeof $534dcb === 'function') {
@@ -11835,7 +11855,18 @@ render._withStripped = true
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [_vm._t("default")], 2)
+  return _c(
+    "div",
+    {
+      staticClass: "row",
+      style: {
+        marginLeft: -_vm.gutter / 2 + "px",
+        marginRight: -_vm.gutter / 2 + "px"
+      }
+    },
+    [_vm._t("default")],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -11883,10 +11914,21 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
 var _default = {
-  name: 'guluCol',
+  name: "guluCol",
   props: {
-    span: [Number, String]
+    span: {
+      type: [Number, String]
+    },
+    offset: {
+      type: [Number, String]
+    },
+    gutter: {
+      type: [Number, String]
+    }
   }
 };
 exports.default = _default;
@@ -11902,7 +11944,28 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col" }, [_vm._t("default")], 2)
+  return _c(
+    "div",
+    {
+      staticClass: "col",
+      class: [
+        _vm.span && "col-" + _vm.span,
+        _vm.offset && "offset-" + _vm.offset
+      ],
+      style: {
+        paddingLeft: _vm.gutter / 2 + "px",
+        paddingRight: _vm.gutter / 2 + "px"
+      }
+    },
+    [
+      _c(
+        "div",
+        { staticStyle: { border: "1px solid red", height: "100px" } },
+        [_vm._t("default")],
+        2
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
