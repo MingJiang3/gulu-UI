@@ -70,7 +70,7 @@ describe('Input', () => {
                     vm = new Constructor({}).$mount()
                     const callback = sinon.fake();
                     vm.$on(eventName, callback)
-                    //触发input的change 事件
+                    //触发input全部事件
                     let event = new Event(eventName);
                     Object.defineProperty(event, 'target', {value: { value: 'hi' }, enumerable: true})
                     let inputElement = vm.$el.querySelector('input')

@@ -11687,7 +11687,7 @@ describe('Input', function () {
       ['change', 'input', 'focus', 'blur'].forEach(function (eventName) {
         vm = new Constructor({}).$mount();
         var callback = sinon.fake();
-        vm.$on(eventName, callback); //触发input的change 事件
+        vm.$on(eventName, callback); //触发input全部事件
 
         var event = new Event(eventName);
         Object.defineProperty(event, 'target', {
