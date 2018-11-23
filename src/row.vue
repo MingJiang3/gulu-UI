@@ -11,6 +11,11 @@ export default {
         gutter:{
             type:[Number,String]
         }
+    },
+    mounted(){
+        this.$children.forEach(vm=>{
+            vm.gutter = this.gutter
+        })
     }
 }
 </script>

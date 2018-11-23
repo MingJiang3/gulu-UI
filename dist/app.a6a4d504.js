@@ -11840,6 +11840,13 @@ var _default = {
     gutter: {
       type: [Number, String]
     }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.$children.forEach(function (vm) {
+      vm.gutter = _this.gutter;
+    });
   }
 };
 exports.default = _default;
@@ -11925,10 +11932,12 @@ var _default = {
     },
     offset: {
       type: [Number, String]
-    },
-    gutter: {
-      type: [Number, String]
     }
+  },
+  data: function data() {
+    return {
+      gutter: 0
+    };
   }
 };
 exports.default = _default;
@@ -12072,7 +12081,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55339" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51005" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
