@@ -11839,6 +11839,12 @@ var _default = {
   props: {
     gutter: {
       type: [Number, String]
+    },
+    align: {
+      type: String,
+      validator: function validator(value) {
+        return ['left', 'center', 'right'].includes(value);
+      }
     }
   },
   mounted: function mounted() {
@@ -11855,6 +11861,10 @@ var _default = {
         marginLeft: -gutter / 2 + 'px',
         marginRight: -gutter / 2 + 'px'
       };
+    },
+    rowClass: function rowClass() {
+      var align = this.align;
+      return [align && "align-".concat(align)];
     }
   }
 };
@@ -11873,7 +11883,7 @@ exports.default = _default;
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "row", style: _vm.rowStyle },
+    { staticClass: "row", class: _vm.rowClass, style: _vm.rowStyle },
     [_vm._t("default")],
     2
   )
@@ -11971,14 +11981,7 @@ exports.default = _default;
   return _c(
     "div",
     { staticClass: "col", class: _vm.colClass, style: _vm.colStyle },
-    [
-      _c(
-        "div",
-        { staticStyle: { border: "1px solid red", height: "100px" } },
-        [_vm._t("default")],
-        2
-      )
-    ]
+    [_c("div", [_vm._t("default")], 2)]
   )
 }
 var staticRenderFns = []
@@ -12086,7 +12089,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51005" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55568" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
