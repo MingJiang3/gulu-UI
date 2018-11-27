@@ -11928,6 +11928,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 //
 //
 //
@@ -11936,6 +11945,17 @@ exports.default = void 0;
 //
 //
 //
+var validator = function validator(value) {
+  var keys = Object.keys(value);
+  var valid = true;
+  keys.forEach(function (key) {
+    if (!['span', 'offset'].includes(value)) {
+      valid = false;
+    }
+  });
+  return valid;
+};
+
 var _default = {
   name: "guluCol",
   props: {
@@ -11944,6 +11964,26 @@ var _default = {
     },
     offset: {
       type: [Number, String]
+    },
+    phone: {
+      type: Object,
+      validator: validator
+    },
+    pad: {
+      type: Object,
+      validator: validator
+    },
+    narrowPc: {
+      type: Object,
+      validator: validator
+    },
+    pc: {
+      type: Object,
+      validator: validator
+    },
+    widePc: {
+      type: Object,
+      validator: validator
     }
   },
   data: function data() {
@@ -11954,8 +11994,14 @@ var _default = {
   computed: {
     colClass: function colClass() {
       var span = this.span,
-          offset = this.offset;
-      return [span && "col-".concat(span), offset && "offset-".concat(offset)];
+          offset = this.offset,
+          phone = this.phone,
+          pad = this.pad,
+          narrowPc = this.narrowPc,
+          pc = this.pc,
+          widePc = this.widePc;
+      var phoneClass = [];
+      return [span && "col-".concat(span), offset && "offset-".concat(offset)].concat(_toConsumableArray(phone ? ["col-phone-".concat(phone.span)] : []), _toConsumableArray(pad ? ["col-pad-".concat(pad.span)] : []), _toConsumableArray(narrowPc ? ["col-narrow-pc-".concat(narrowPc.span)] : []), _toConsumableArray(pc ? ["col-pc-".concat(pc.span)] : []), _toConsumableArray(widePc ? ["col-wide-pc-".concat(widePc.span)] : []));
     },
     colStyle: function colStyle() {
       return {
@@ -12089,7 +12135,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55568" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52988" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
