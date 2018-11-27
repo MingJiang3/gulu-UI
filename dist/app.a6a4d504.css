@@ -566,6 +566,20 @@
 .content[data-v-ee9042] {
   flex-grow: 1;
 }
+.sider[data-v-fa1dbb] {
+  position: relative;
+}
+.sider > button[data-v-fa1dbb] {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.slide-enter-active[data-v-fa1dbb], .slide-leave-active[data-v-fa1dbb] {
+  transition: all 0.5s;
+}
+.slide-enter[data-v-fa1dbb], .slide-leave-to[data-v-fa1dbb] {
+  margin-left: -200px;
+}
 .layout[data-v-2caea8] {
   flex-grow: 1;
   display: flex;
