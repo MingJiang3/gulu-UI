@@ -588,3 +588,19 @@
 .layout.hasSider[data-v-2caea8] {
   flex-direction: row;
 }
+.toast[data-v-c548cc] {
+  font-size: 14px;
+  height: 40px;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 4px;
+  box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5);
+  padding: 0 16px;
+  line-height: 1.8;
+  display: flex;
+  align-items: center;
+}
