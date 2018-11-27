@@ -12405,7 +12405,32 @@ exports.default = void 0;
 //
 //
 var _default = {
-  name: 'guluToast'
+  name: 'guluToast',
+  props: {
+    aotuClose: {
+      type: Boolean,
+      default: true
+    },
+    closeDelay: {
+      type: Number,
+      default: 3
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    if (this.aotuClose) {
+      setTimeout(function () {
+        _this.close();
+      }, this.closeDelay * 1000);
+    }
+  },
+  methods: {
+    close: function close() {
+      this.$el.remove();
+      this.$destroy();
+    }
+  }
 };
 exports.default = _default;
         var $c548cc = exports.default || module.exports;
