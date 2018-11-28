@@ -13,32 +13,31 @@ import Layout from './layout'
 import Toast from './toast'
 import Plugin from './plugin'
 
-Vue.component('g-button',Button)
-Vue.component('g-icon',Icon)
-Vue.component('g-button-group',ButtonGroup)
-Vue.component('g-input',Input)
-Vue.component('g-row',Row)
-Vue.component('g-col',Col)
-Vue.component('g-layout',Layout)
-Vue.component('g-sider',Sider)
-Vue.component('g-content',Content)
-Vue.component('g-footer',Footer)
-Vue.component('g-toast',Toast)
-Vue.component('g-header',Header)
+Vue.component('g-button', Button)
+Vue.component('g-icon', Icon)
+Vue.component('g-button-group', ButtonGroup)
+Vue.component('g-input', Input)
+Vue.component('g-row', Row)
+Vue.component('g-col', Col)
+Vue.component('g-layout', Layout)
+Vue.component('g-sider', Sider)
+Vue.component('g-content', Content)
+Vue.component('g-footer', Footer)
+Vue.component('g-toast', Toast)
+Vue.component('g-header', Header)
 Vue.use(Plugin)
 
 new Vue({
-    el:'#app',
-    data:{
-        loading1:false,
-        loading2:true,
-        loading3:false,
-        message:'hi'
+    el: '#app',
+    data: {
+        loading1: false,
+        loading2: true,
+        loading3: false,
+        message: 'hi'
     },
-    methods:{
-        showToast(e){
-            this.$toast('I am toast')
-        }
+    methods: {},
+    created() {
+        this.$toast('I am toast')
     }
 })
 

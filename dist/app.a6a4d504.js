@@ -12404,6 +12404,11 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
 var _default = {
   name: 'guluToast',
   props: {
@@ -12413,7 +12418,18 @@ var _default = {
     },
     closeDelay: {
       type: Number,
-      default: 3
+      default: 30000
+    },
+    closeButton: {
+      type: Object,
+      default: function _default() {
+        return {
+          text: '关闭',
+          callback: function callback(toast) {
+            toast.close();
+          }
+        };
+      }
     }
   },
   mounted: function mounted() {
@@ -12425,10 +12441,17 @@ var _default = {
       }, this.closeDelay * 1000);
     }
   },
+  created: function created() {
+    console.log(this.closeButton);
+  },
   methods: {
     close: function close() {
       this.$el.remove();
       this.$destroy();
+    },
+    onClickClose: function onClickClose() {
+      this.close();
+      this.closeButton.callback();
     }
   }
 };
@@ -12445,7 +12468,28 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "toast" }, [_vm._t("default")], 2)
+  return _c(
+    "div",
+    { staticClass: "toast" },
+    [
+      _vm._t("default"),
+      _vm._v(" "),
+      _c("div", { staticClass: "line" }, [
+        _vm.closeButton
+          ? _c(
+              "span",
+              { staticClass: "close", on: { click: _vm.onClickClose } },
+              [
+                _vm._v(
+                  "\n            " + _vm._s(_vm.closeButton.text) + "\n        "
+                )
+              ]
+            )
+          : _vm._e()
+      ])
+    ],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -12496,8 +12540,17 @@ var _default = {
   install: function install(Vue, options) {
     Vue.prototype.$toast = function (message) {
       var Constructor = Vue.extend(_toast.default);
-      var toast = new Constructor();
-      toast.$slots.default = [message]; //像toast插槽传默认内容
+      var toast = new Constructor({
+        propsData: {
+          closeButton: {
+            text: '知道了',
+            callback: function callback() {
+              console.log('ok');
+            }
+          }
+        }
+      });
+      toast.$slots.default = [message]; //向toast插槽传默认内容
 
       toast.$mount();
       document.body.appendChild(toast.$el);
@@ -12572,10 +12625,9 @@ new _vue.default({
     loading3: false,
     message: 'hi'
   },
-  methods: {
-    showToast: function showToast(e) {
-      this.$toast('I am toast');
-    }
+  methods: {},
+  created: function created() {
+    this.$toast('I am toast');
   }
 });
 },{"vue":"node_modules/vue/dist/vue.common.js","./button":"src/button.vue","./icon":"src/icon.vue","./buttonGroup":"src/buttonGroup.vue","./input":"src/input.vue","./row":"src/row.vue","./col":"src/col.vue","./header":"src/header.vue","./footer":"src/footer.vue","./content":"src/content.vue","./sider":"src/sider.vue","./layout":"src/layout.vue","./toast":"src/toast.vue","./plugin":"src/plugin.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -12605,7 +12657,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52988" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56770" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
