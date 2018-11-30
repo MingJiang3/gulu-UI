@@ -1,11 +1,12 @@
 <template>
-    <div class="toast">
-        <slot></slot>
-        <div class="line">
-            <span v-if="closeButton" class="close" @click="onClickClose">
-                {{closeButton.text}}
-            </span>
+    <div class="toast" ref="toast">
+        <div class="message">
+            <slot></slot>
         </div>
+        <div class="line" ref="line"></div>
+        <span v-if="closeButton" class="close" @click="onClickClose">
+            {{closeButton.text}}
+        </span>
     </div>
 </template>
 
@@ -13,10 +14,10 @@
     export default {
         name: 'guluToast',
         props: {
-            aotuClose: {
-                type: [Boolean,Number],
+            autoClose: {
+                type: [Boolean, Number],
                 default: 3,
-                validator(value){
+                validator(value) {
                     return value === false || typeof value === 'Number';
                 }
             },
@@ -30,32 +31,38 @@
                     }
                 }
             },
-            position:{
-                type:String,
-                default:'top',
-                validator(value){
-                    ['top','midel','bottom'].includes(value)
+            position: {
+                type: String,
+                default: 'top',
+                validator(value) {
+                    return ['top', 'midel', 'bottom'].includes(value)
                 }
             }
         },
         mounted() {
-            if (this.aotuClose) {
-                setTimeout(() => {
-                    this.close()
-                }, this.closeDelay * 1000)
-            }
-        },
-        created(){
-            console.log(this.closeButton);
+            this.autoClose()
+            this.autoLineHeight()
         },
         methods: {
             close() {
                 this.$el.remove()
                 this.$destroy()
             },
-            onClickClose(){
+            autoClose() {
+                if (this.aotuClose) {
+                    setTimeout(() => {
+                        this.close()
+                    }, this.closeDelay * 1000)
+                }
+            },
+            onClickClose() {
                 this.close()
                 this.closeButton.callback()
+            },
+            autoLineHeight() {
+                this.$nextTick(()=>{
+                    this.$refs.line.style.height = `${this.$refs.toast.getBoundingClientRect().height}px`
+                })
             }
         }
     }
@@ -63,11 +70,11 @@
 
 <style lang="scss" scoped>
     $font-size: 14px;
-    $toast-height: 40px;
+    $toast-min-height: 40px;
     $toast-bg: rgba(0, 0, 0, 0.75);
     .toast {
         font-size: $font-size;
-        height: $toast-height;
+        min-height: $toast-min-height;
         position: fixed;
         top: 0;
         left: 50%;
@@ -80,11 +87,18 @@
         line-height: 1.8;
         display: flex;
         align-items: center;
+        .message{
+            padding: 7px 0;
+        }
     }
-    .close{
+
+    .close {
         padding-left: 16px;
+        padding-right: 1px;
+        flex-shrink: 0;
     }
-    .line{
+
+    .line {
         border-left: 1px solid #666;
         height: 100%;
         display: flex;

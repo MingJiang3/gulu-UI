@@ -12409,16 +12409,16 @@ exports.default = void 0;
 //
 //
 //
+//
 var _default = {
   name: 'guluToast',
   props: {
-    aotuClose: {
-      type: Boolean,
-      default: true
-    },
-    closeDelay: {
-      type: Number,
-      default: 30000
+    autoClose: {
+      type: [Boolean, Number],
+      default: 3,
+      validator: function validator(value) {
+        return value === false || typeof value === 'Number';
+      }
     },
     closeButton: {
       type: Object,
@@ -12430,28 +12430,43 @@ var _default = {
           }
         };
       }
+    },
+    position: {
+      type: String,
+      default: 'top',
+      validator: function validator(value) {
+        return ['top', 'midel', 'bottom'].includes(value);
+      }
     }
   },
   mounted: function mounted() {
-    var _this = this;
-
-    if (this.aotuClose) {
-      setTimeout(function () {
-        _this.close();
-      }, this.closeDelay * 1000);
-    }
-  },
-  created: function created() {
-    console.log(this.closeButton);
+    this.autoClose();
+    this.autoLineHeight();
   },
   methods: {
     close: function close() {
       this.$el.remove();
       this.$destroy();
     },
+    autoClose: function autoClose() {
+      var _this = this;
+
+      if (this.aotuClose) {
+        setTimeout(function () {
+          _this.close();
+        }, this.closeDelay * 1000);
+      }
+    },
     onClickClose: function onClickClose() {
       this.close();
       this.closeButton.callback();
+    },
+    autoLineHeight: function autoLineHeight() {
+      var _this2 = this;
+
+      this.$nextTick(function () {
+        _this2.$refs.line.style.height = "".concat(_this2.$refs.toast.getBoundingClientRect().height, "px");
+      });
     }
   }
 };
@@ -12468,28 +12483,17 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "toast" },
-    [
-      _vm._t("default"),
-      _vm._v(" "),
-      _c("div", { staticClass: "line" }, [
-        _vm.closeButton
-          ? _c(
-              "span",
-              { staticClass: "close", on: { click: _vm.onClickClose } },
-              [
-                _vm._v(
-                  "\n            " + _vm._s(_vm.closeButton.text) + "\n        "
-                )
-              ]
-            )
-          : _vm._e()
-      ])
-    ],
-    2
-  )
+  return _c("div", { ref: "toast", staticClass: "toast" }, [
+    _c("div", { staticClass: "message" }, [_vm._t("default")], 2),
+    _vm._v(" "),
+    _c("div", { ref: "line", staticClass: "line" }),
+    _vm._v(" "),
+    _vm.closeButton
+      ? _c("span", { staticClass: "close", on: { click: _vm.onClickClose } }, [
+          _vm._v("\n        " + _vm._s(_vm.closeButton.text) + "\n    ")
+        ])
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -12538,17 +12542,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var _default = {
   install: function install(Vue, options) {
-    Vue.prototype.$toast = function (message) {
+    Vue.prototype.$toast = function (message, toastOptions) {
       var Constructor = Vue.extend(_toast.default);
       var toast = new Constructor({
-        propsData: {
-          closeButton: {
-            text: '知道了',
-            callback: function callback() {
-              console.log('ok');
-            }
-          }
-        }
+        propsData: toastOptions
       });
       toast.$slots.default = [message]; //向toast插槽传默认内容
 
@@ -12627,7 +12624,7 @@ new _vue.default({
   },
   methods: {},
   created: function created() {
-    this.$toast('I am toast');
+    this.$toast('货他内让你');
   }
 });
 },{"vue":"node_modules/vue/dist/vue.common.js","./button":"src/button.vue","./icon":"src/icon.vue","./buttonGroup":"src/buttonGroup.vue","./input":"src/input.vue","./row":"src/row.vue","./col":"src/col.vue","./header":"src/header.vue","./footer":"src/footer.vue","./content":"src/content.vue","./sider":"src/sider.vue","./layout":"src/layout.vue","./toast":"src/toast.vue","./plugin":"src/plugin.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -12657,7 +12654,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50119" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56519" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

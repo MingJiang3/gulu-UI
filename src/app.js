@@ -37,7 +37,7 @@ new Vue({
     },
     methods: {},
     created() {
-        this.$toast('I am toast')
+        this.$toast('货他内让你')
     }
 })
 
