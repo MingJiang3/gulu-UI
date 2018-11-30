@@ -37,7 +37,14 @@ new Vue({
     },
     methods: {},
     created() {
-        this.$toast('货他内让你')
+        this.$toast('货他内让你',{
+            closeButton:{
+                text:'close',
+                callback(){
+                    this.close()
+                }
+            }
+        })
     }
 })
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="toast" ref="toast">
+    <div class="toast" ref="toast" :class="toastPosition">
         <div class="message">
             <slot></slot>
         </div>
@@ -25,9 +25,7 @@
                 type: Object,
                 default() {
                     return {
-                        text: '关闭', callback: (toast) => {
-                            toast.close()
-                        }
+                        text: '关闭', callback:undefined
                     }
                 }
             },
@@ -35,13 +33,20 @@
                 type: String,
                 default: 'top',
                 validator(value) {
-                    return ['top', 'midel', 'bottom'].includes(value)
+                    return ['top', 'middle', 'bottom'].indexOf(value) >=0
                 }
             }
         },
         mounted() {
             this.autoClose()
             this.autoLineHeight()
+        },
+        computed:{
+            toastPosition(){
+               return{
+                   [`position-${this.position}`]:true
+               }
+            }
         },
         methods: {
             close() {
@@ -76,7 +81,6 @@
         font-size: $font-size;
         min-height: $toast-min-height;
         position: fixed;
-        top: 0;
         left: 50%;
         transform: translateX(-50%);
         color: white;
@@ -89,6 +93,17 @@
         align-items: center;
         .message{
             padding: 7px 0;
+        }
+        &.position-top{
+            top: 0;
+        }
+        &.position-middle{
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        &.position-bottom{
+            bottom: 0;
+            transform: translateX(-50%);
         }
     }
 

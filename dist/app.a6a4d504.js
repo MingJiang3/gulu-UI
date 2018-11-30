@@ -12398,6 +12398,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -12425,9 +12428,7 @@ var _default = {
       default: function _default() {
         return {
           text: '关闭',
-          callback: function callback(toast) {
-            toast.close();
-          }
+          callback: undefined
         };
       }
     },
@@ -12435,13 +12436,18 @@ var _default = {
       type: String,
       default: 'top',
       validator: function validator(value) {
-        return ['top', 'midel', 'bottom'].includes(value);
+        return ['top', 'middle', 'bottom'].indexOf(value) >= 0;
       }
     }
   },
   mounted: function mounted() {
     this.autoClose();
     this.autoLineHeight();
+  },
+  computed: {
+    toastPosition: function toastPosition() {
+      return _defineProperty({}, "position-".concat(this.position), true);
+    }
   },
   methods: {
     close: function close() {
@@ -12483,17 +12489,23 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { ref: "toast", staticClass: "toast" }, [
-    _c("div", { staticClass: "message" }, [_vm._t("default")], 2),
-    _vm._v(" "),
-    _c("div", { ref: "line", staticClass: "line" }),
-    _vm._v(" "),
-    _vm.closeButton
-      ? _c("span", { staticClass: "close", on: { click: _vm.onClickClose } }, [
-          _vm._v("\n        " + _vm._s(_vm.closeButton.text) + "\n    ")
-        ])
-      : _vm._e()
-  ])
+  return _c(
+    "div",
+    { ref: "toast", staticClass: "toast", class: _vm.toastPosition },
+    [
+      _c("div", { staticClass: "message" }, [_vm._t("default")], 2),
+      _vm._v(" "),
+      _c("div", { ref: "line", staticClass: "line" }),
+      _vm._v(" "),
+      _vm.closeButton
+        ? _c(
+            "span",
+            { staticClass: "close", on: { click: _vm.onClickClose } },
+            [_vm._v("\n        " + _vm._s(_vm.closeButton.text) + "\n    ")]
+          )
+        : _vm._e()
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -12540,21 +12552,38 @@ var _toast = _interopRequireDefault(require("./toast"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var currentToast;
 var _default = {
   install: function install(Vue, options) {
     Vue.prototype.$toast = function (message, toastOptions) {
-      var Constructor = Vue.extend(_toast.default);
-      var toast = new Constructor({
+      if (currentToast) {
+        currentToast.close();
+      }
+
+      currentToast = createToast({
+        Vue: Vue,
+        message: message,
         propsData: toastOptions
       });
-      toast.$slots.default = [message]; //向toast插槽传默认内容
-
-      toast.$mount();
-      document.body.appendChild(toast.$el);
     };
   }
 };
 exports.default = _default;
+
+function createToast(_ref) {
+  var Vue = _ref.Vue,
+      message = _ref.message,
+      propsData = _ref.propsData;
+  var Constructor = Vue.extend(_toast.default);
+  var toast = new Constructor({
+    propsData: propsData
+  });
+  toast.$slots.default = [message]; //向toast插槽传默认内容
+
+  toast.$mount();
+  document.body.appendChild(toast.$el);
+  return toast;
+}
 },{"./toast":"src/toast.vue"}],"src/app.js":[function(require,module,exports) {
 "use strict";
 
@@ -12624,7 +12653,14 @@ new _vue.default({
   },
   methods: {},
   created: function created() {
-    this.$toast('货他内让你');
+    this.$toast('货他内让你', {
+      closeButton: {
+        text: 'close',
+        callback: function callback() {
+          this.close();
+        }
+      }
+    });
   }
 });
 },{"vue":"node_modules/vue/dist/vue.common.js","./button":"src/button.vue","./icon":"src/icon.vue","./buttonGroup":"src/buttonGroup.vue","./input":"src/input.vue","./row":"src/row.vue","./col":"src/col.vue","./header":"src/header.vue","./footer":"src/footer.vue","./content":"src/content.vue","./sider":"src/sider.vue","./layout":"src/layout.vue","./toast":"src/toast.vue","./plugin":"src/plugin.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
