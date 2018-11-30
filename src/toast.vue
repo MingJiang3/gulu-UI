@@ -30,7 +30,8 @@
                         }
                     }
                 }
-            }
+            },
+
         },
         mounted() {
             if (this.aotuClose) {
