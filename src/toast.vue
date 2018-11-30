@@ -14,12 +14,11 @@
         name: 'guluToast',
         props: {
             aotuClose: {
-                type: Boolean,
-                default: true
-            },
-            closeDelay: {
-                type: Number,
-                default: 30000
+                type: [Boolean,Number],
+                default: 3,
+                validator(value){
+                    return value === false || typeof value === 'Number';
+                }
             },
             closeButton: {
                 type: Object,
@@ -31,7 +30,13 @@
                     }
                 }
             },
-
+            position:{
+                type:String,
+                default:'top',
+                validator(value){
+                    ['top','midel','bottom'].includes(value)
+                }
+            }
         },
         mounted() {
             if (this.aotuClose) {
