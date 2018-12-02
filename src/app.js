@@ -35,16 +35,22 @@ new Vue({
         loading3: false,
         message: 'hi'
     },
-    methods: {},
-    created() {
-        this.$toast('货他内让你',{
-            closeButton:{
-                text:'close',
-                callback(){
-                    this.close()
+    methods: {
+        open(){
+            this.$toast('货他内解决大V深V浑身都会立方米让你',{
+                closeButton:{
+                    autoClose:9,
+                    position:'bottom',
+                    text:'更好的',
+                    callback(){
+                        this.close()
+                    }
                 }
-            }
-        })
+            })
+        }
+    },
+    created() {
+
     }
 })
 

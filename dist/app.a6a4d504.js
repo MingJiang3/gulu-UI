@@ -12413,21 +12413,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 var _default = {
   name: 'guluToast',
   props: {
     autoClose: {
-      type: [Boolean, Number],
-      default: 3,
-      validator: function validator(value) {
-        return value === false || typeof value === 'Number';
-      }
+      type: Number,
+      default: 93 // validator(value) {
+      //     return value === 'Number';
+      // }
+
     },
     closeButton: {
       type: Object,
       default: function _default() {
         return {
-          text: '关闭',
+          text: 'close',
           callback: undefined
         };
       }
@@ -12441,7 +12443,7 @@ var _default = {
     }
   },
   mounted: function mounted() {
-    this.autoClose();
+    this.autoCloses();
     this.autoLineHeight();
   },
   computed: {
@@ -12452,15 +12454,16 @@ var _default = {
   methods: {
     close: function close() {
       this.$el.remove();
+      this.$emit('close');
       this.$destroy();
     },
-    autoClose: function autoClose() {
+    autoCloses: function autoCloses() {
       var _this = this;
 
-      if (this.aotuClose) {
+      if (this.autoClose) {
         setTimeout(function () {
           _this.close();
-        }, this.closeDelay * 1000);
+        }, this.autoClose * 1000);
       }
     },
     onClickClose: function onClickClose() {
@@ -12491,19 +12494,25 @@ exports.default = _default;
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { ref: "toast", staticClass: "toast", class: _vm.toastPosition },
+    { ref: "toast", staticClass: "wrapper", class: _vm.toastPosition },
     [
-      _c("div", { staticClass: "message" }, [_vm._t("default")], 2),
-      _vm._v(" "),
-      _c("div", { ref: "line", staticClass: "line" }),
-      _vm._v(" "),
-      _vm.closeButton
-        ? _c(
-            "span",
-            { staticClass: "close", on: { click: _vm.onClickClose } },
-            [_vm._v("\n        " + _vm._s(_vm.closeButton.text) + "\n    ")]
-          )
-        : _vm._e()
+      _c("div", { staticClass: "toast" }, [
+        _c("div", { staticClass: "message" }, [_vm._t("default")], 2),
+        _vm._v(" "),
+        _c("div", { ref: "line", staticClass: "line" }),
+        _vm._v(" "),
+        _vm.closeButton
+          ? _c(
+              "span",
+              { staticClass: "close", on: { click: _vm.onClickClose } },
+              [
+                _vm._v(
+                  "\n            " + _vm._s(_vm.closeButton.text) + "\n        "
+                )
+              ]
+            )
+          : _vm._e()
+      ])
     ]
   )
 }
@@ -12563,7 +12572,10 @@ var _default = {
       currentToast = createToast({
         Vue: Vue,
         message: message,
-        propsData: toastOptions
+        propsData: toastOptions,
+        onClose: function onClose() {
+          currentToast = null;
+        }
       });
     };
   }
@@ -12573,7 +12585,8 @@ exports.default = _default;
 function createToast(_ref) {
   var Vue = _ref.Vue,
       message = _ref.message,
-      propsData = _ref.propsData;
+      propsData = _ref.propsData,
+      onClose = _ref.onClose;
   var Constructor = Vue.extend(_toast.default);
   var toast = new Constructor({
     propsData: propsData
@@ -12581,6 +12594,7 @@ function createToast(_ref) {
   toast.$slots.default = [message]; //向toast插槽传默认内容
 
   toast.$mount();
+  toast.$on('close', onClose);
   document.body.appendChild(toast.$el);
   return toast;
 }
@@ -12651,17 +12665,21 @@ new _vue.default({
     loading3: false,
     message: 'hi'
   },
-  methods: {},
-  created: function created() {
-    this.$toast('货他内让你', {
-      closeButton: {
-        text: 'close',
-        callback: function callback() {
-          this.close();
+  methods: {
+    open: function open() {
+      this.$toast('货他内解决大V深V浑身都会立方米让你', {
+        closeButton: {
+          autoClose: 9,
+          position: 'bottom',
+          text: '更好的',
+          callback: function callback() {
+            this.close();
+          }
         }
-      }
-    });
-  }
+      });
+    }
+  },
+  created: function created() {}
 });
 },{"vue":"node_modules/vue/dist/vue.common.js","./button":"src/button.vue","./icon":"src/icon.vue","./buttonGroup":"src/buttonGroup.vue","./input":"src/input.vue","./row":"src/row.vue","./col":"src/col.vue","./header":"src/header.vue","./footer":"src/footer.vue","./content":"src/content.vue","./sider":"src/sider.vue","./layout":"src/layout.vue","./toast":"src/toast.vue","./plugin":"src/plugin.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -12690,7 +12708,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56519" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50138" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
