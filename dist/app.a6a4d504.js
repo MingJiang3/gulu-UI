@@ -12420,16 +12420,16 @@ var _default = {
   props: {
     autoClose: {
       type: Number,
-      default: 93 // validator(value) {
-      //     return value === 'Number';
-      // }
-
+      default: 3,
+      validator: function validator(value) {
+        return typeof value === 'number';
+      }
     },
     closeButton: {
       type: Object,
       default: function _default() {
         return {
-          text: 'close',
+          text: '关闭',
           callback: undefined
         };
       }
@@ -12492,29 +12492,25 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { ref: "toast", staticClass: "wrapper", class: _vm.toastPosition },
-    [
-      _c("div", { staticClass: "toast" }, [
-        _c("div", { staticClass: "message" }, [_vm._t("default")], 2),
-        _vm._v(" "),
-        _c("div", { ref: "line", staticClass: "line" }),
-        _vm._v(" "),
-        _vm.closeButton
-          ? _c(
-              "span",
-              { staticClass: "close", on: { click: _vm.onClickClose } },
-              [
-                _vm._v(
-                  "\n            " + _vm._s(_vm.closeButton.text) + "\n        "
-                )
-              ]
-            )
-          : _vm._e()
-      ])
-    ]
-  )
+  return _c("div", { staticClass: "wrapper", class: _vm.toastPosition }, [
+    _c("div", { ref: "toast", staticClass: "toast" }, [
+      _c("div", { staticClass: "message" }, [_vm._t("default")], 2),
+      _vm._v(" "),
+      _c("div", { ref: "line", staticClass: "line" }),
+      _vm._v(" "),
+      _vm.closeButton
+        ? _c(
+            "span",
+            { staticClass: "close", on: { click: _vm.onClickClose } },
+            [
+              _vm._v(
+                "\n            " + _vm._s(_vm.closeButton.text) + "\n        "
+              )
+            ]
+          )
+        : _vm._e()
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -12665,21 +12661,19 @@ new _vue.default({
     loading3: false,
     message: 'hi'
   },
-  methods: {
-    open: function open() {
-      this.$toast('货他内解决大V深V浑身都会立方米让你', {
-        closeButton: {
-          autoClose: 9,
-          position: 'bottom',
-          text: '更好的',
-          callback: function callback() {
-            this.close();
-          }
+  methods: {},
+  mounted: function mounted() {
+    this.$toast('货他内解决大V深V浑身都会立方米让你', {
+      autoClose: 9,
+      position: 'bottom',
+      closeButton: {
+        text: '更好打发第三方的',
+        callback: function callback() {
+          console.log('i am close');
         }
-      });
-    }
-  },
-  created: function created() {}
+      }
+    });
+  }
 });
 },{"vue":"node_modules/vue/dist/vue.common.js","./button":"src/button.vue","./icon":"src/icon.vue","./buttonGroup":"src/buttonGroup.vue","./input":"src/input.vue","./row":"src/row.vue","./col":"src/col.vue","./header":"src/header.vue","./footer":"src/footer.vue","./content":"src/content.vue","./sider":"src/sider.vue","./layout":"src/layout.vue","./toast":"src/toast.vue","./plugin":"src/plugin.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];

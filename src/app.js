@@ -36,21 +36,20 @@ new Vue({
         message: 'hi'
     },
     methods: {
-        open(){
-            this.$toast('货他内解决大V深V浑身都会立方米让你',{
+
+    },
+    mounted() {
+        this.$toast('货他内解决大V深V浑身都会立方米让你',{
+                autoClose:9,
+                position:'bottom',
                 closeButton:{
-                    autoClose:9,
-                    position:'bottom',
-                    text:'更好的',
+                    text:'更好打发第三方的',
                     callback(){
-                        this.close()
+                        console.log('i am close');
                     }
                 }
-            })
-        }
-    },
-    created() {
 
+        })
     }
 })
 
