@@ -24,7 +24,7 @@ describe('Toast', () => {
                 done()
             })
         });
-        it('接受closeButton ', () => {
+        it('接受closeButton ', (done) => {
             const callback = sinon.fake();
             const Constructor = Vue.extend(Toast)
             const vm = new Constructor({
@@ -37,8 +37,11 @@ describe('Toast', () => {
             }).$mount()
             let closeButton = vm.$el.querySelector('.close')
             expect(closeButton.textContent.trim()).to.eq('ok')
-            closeButton.click()
-            expect(callback).to.have.been.called
+            setTimeout(function () {
+                closeButton.click()
+                expect(callback).to.have.been.called
+            }, 500)
+            done()
         });
         it('接受position ', () => {
             const Constructor = Vue.extend(Toast)
