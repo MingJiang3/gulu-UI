@@ -32,7 +32,9 @@
             }
         },
         mounted() {
-            // console.log(this.$children);
+            if (this.$children.length === 0){
+                console && console.warn && console.warn('tabs的子组件只能是tabs-heade及tabs-body')
+            }
             this.$children.forEach((vm) => {
                 if (vm.$options.name === 'guluTabsHead') {
                     vm.$children.forEach((childVm) => {

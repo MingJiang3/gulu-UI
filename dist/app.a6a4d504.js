@@ -12639,7 +12639,10 @@ var _default = {
   mounted: function mounted() {
     var _this = this;
 
-    // console.log(this.$children);
+    if (this.$children.length === 0) {
+      console && console.warn && console.warn('tabs的子组件只能是tabs-heade及tabs-body');
+    }
+
     this.$children.forEach(function (vm) {
       if (vm.$options.name === 'guluTabsHead') {
         vm.$children.forEach(function (childVm) {
