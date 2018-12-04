@@ -12888,7 +12888,8 @@ var _default = {
   computed: {
     classes: function classes() {
       return {
-        active: this.active
+        active: this.active,
+        disabled: this.disabled
       };
     }
   },
@@ -12901,6 +12902,10 @@ var _default = {
   },
   methods: {
     onClick: function onClick() {
+      if (this.disabled) {
+        return;
+      }
+
       this.eventBus.$emit('update:selected', this.name, this);
     }
   }

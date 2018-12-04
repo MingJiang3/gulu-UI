@@ -693,11 +693,15 @@
   cursor: pointer;
   align-items: center;
   display: flex;
-  color: #595959;
+  color: black;
 }
 .tabs-item.active[data-v-b3b755] {
   font-weight: bold;
   color: #1890ff;
+}
+.tabs-item.disabled[data-v-b3b755] {
+  color: #bfbfbf;
+  cursor: no-drop;
 }
 .tabs-pane[data-v-6763ed] {
   padding: 1em;

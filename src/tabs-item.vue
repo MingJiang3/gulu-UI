@@ -25,7 +25,8 @@
         computed: {
             classes() {
                 return {
-                    active: this.active
+                    active: this.active,
+                    disabled:this.disabled
                 }
             }
         },
@@ -36,6 +37,7 @@
         },
         methods:{
             onClick(){
+                if (this.disabled){return}
                 this.eventBus.$emit('update:selected',this.name,this)
             }
         }
@@ -49,10 +51,14 @@
         cursor: pointer;
         align-items: center;
         display: flex;
-        color: #595959;
+        color: black;
         &.active {
             font-weight: bold;
             color: #1890ff;
+        }
+        &.disabled{
+            color: #bfbfbf;
+            cursor: no-drop;
         }
     }
 </style>
