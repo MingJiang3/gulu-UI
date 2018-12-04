@@ -12720,8 +12720,15 @@ var _default = {
   name: 'guluTabsHead',
   inject: ['eventBus'],
   mounted: function mounted() {
+    var _this = this;
+
     this.eventBus.$on('update:selected', function (item, vm) {
-      console.log(vm);
+      var _vm$$el$getBoundingCl = vm.$el.getBoundingClientRect(),
+          width = _vm$$el$getBoundingCl.width,
+          left = _vm$$el$getBoundingCl.left;
+
+      _this.$refs.line.style.width = "".concat(width, "px");
+      _this.$refs.line.style.left = "".concat(left, "px");
     });
   }
 };

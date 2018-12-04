@@ -672,32 +672,33 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border: 1px solid red;
   height: 40px;
   position: relative;
+  border-bottom: 1px solid #edebed;
 }
 .tabs-head > .action-wrapper[data-v-a419eb] {
   margin-left: auto;
   padding: 0 2em;
 }
 .tabs-head > .line[data-v-a419eb] {
+  transition: all 350ms;
   position: absolute;
   bottom: 0;
-  border-bottom: 3px solid black;
-  width: 20px;
+  border-bottom: 3px solid #1890ff;
 }
 .tabs-item[data-v-b3b755] {
-  padding: 0 2em;
+  padding: 0 1em;
   flex-shrink: 0;
   height: 100%;
   cursor: pointer;
   align-items: center;
   display: flex;
+  color: #595959;
 }
 .tabs-item.active[data-v-b3b755] {
   font-weight: bold;
-  color: cornflowerblue;
+  color: #1890ff;
 }
-.tabs-pane.active[data-v-6763ed] {
-  background: red;
+.tabs-pane[data-v-6763ed] {
+  padding: 1em;
 }
