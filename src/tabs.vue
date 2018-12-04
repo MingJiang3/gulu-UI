@@ -4,6 +4,7 @@
     </div>
 </template>
 <script>
+    import Vue from 'vue'
     export default {
         name:'guluTabs',
         props:{
@@ -19,9 +20,19 @@
                 }
             }
         },
-        created(){
+        data(){
+            return{
+                eventBus:new Vue()
+            }
+        },
+        provide(){
+            return{
+                eventBus:this.eventBus
+            }
+        },
+        mounted(){
             // tabs组件必修要触发selected事件,才能使 .sync 修饰符有用
-            this.$emit('update:selected','xxx')
+            this.eventBus.$emit('update:selected',this.selected)
         }
     }
 </script>

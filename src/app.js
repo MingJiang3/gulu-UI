@@ -41,10 +41,7 @@ Vue.use(Plugin)
 new Vue({
     el: '#app',
     data: {
-        loading1: false,
-        loading2: true,
-        loading3: false,
-        message: 'hi'
+        selectedTab:"man"
     },
     methods: {
 

@@ -6,6 +6,7 @@
 <script>
     export default {
         name:'tabs-body',
+        inject:['eventBus'],
     }
 </script>
 <style lang="scss" scoped>

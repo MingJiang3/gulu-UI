@@ -12601,6 +12601,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _vue = _interopRequireDefault(require("vue"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //
 //
 //
@@ -12621,9 +12626,19 @@ var _default = {
       }
     }
   },
-  created: function created() {
+  data: function data() {
+    return {
+      eventBus: new _vue.default()
+    };
+  },
+  provide: function provide() {
+    return {
+      eventBus: this.eventBus
+    };
+  },
+  mounted: function mounted() {
     // tabs组件必修要触发selected事件,才能使 .sync 修饰符有用
-    this.$emit('update:selected', 'xxx');
+    this.eventBus.$emit('update:selected', this.selected);
   }
 };
 exports.default = _default;
@@ -12674,7 +12689,7 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.common.js"}],"src/tabs-head.vue":[function(require,module,exports) {
+},{"vue":"node_modules/vue/dist/vue.common.js","_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js"}],"src/tabs-head.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12687,8 +12702,14 @@ exports.default = void 0;
 //
 //
 //
+//
+//
 var _default = {
-  name: 'guluTabsHead'
+  name: 'guluTabsHead',
+  inject: ['eventBus'],
+  created: function created() {
+    this.eventBus.$on('update:selected', 'head');
+  }
 };
 exports.default = _default;
         var $a419eb = exports.default || module.exports;
@@ -12706,7 +12727,11 @@ exports.default = _default;
   return _c(
     "div",
     { staticClass: "tabs-head" },
-    [_vm._t("default"), _vm._v(" "), _vm._t("actions")],
+    [
+      _vm._t("default"),
+      _vm._v(" "),
+      _c("div", { staticClass: "action-wrapper" }, [_vm._t("actions")], 2)
+    ],
     2
   )
 }
@@ -12756,7 +12781,8 @@ exports.default = void 0;
 //
 //
 var _default = {
-  name: 'tabs-body'
+  name: 'tabs-body',
+  inject: ['eventBus']
 };
 exports.default = _default;
         var $4e4899 = exports.default || module.exports;
@@ -12820,10 +12846,43 @@ exports.default = void 0;
 //
 var _default = {
   name: 'guluTabsItem',
+  inject: ['eventBus'],
+  data: function data() {
+    return {
+      active: false
+    };
+  },
   props: {
     disabled: {
       type: Boolean,
       default: false
+    },
+    name: {
+      type: String | Number,
+      required: true
+    }
+  },
+  computed: {
+    classes: function classes() {
+      return {
+        active: this.active
+      };
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    this.eventBus.$on('update:selected', function (name) {
+      if (name === _this.name) {
+        _this.active = true;
+      } else {
+        _this.active = false;
+      }
+    });
+  },
+  methods: {
+    xxx: function xxx() {
+      this.eventBus.$emit('update:selected', this.name);
     }
   }
 };
@@ -12840,7 +12899,12 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "tabs-item" }, [_vm._t("default")], 2)
+  return _c(
+    "div",
+    { staticClass: "tabs-item", class: _vm.classes, on: { click: _vm.xxx } },
+    [_vm._t("default")],
+    2
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -12888,7 +12952,33 @@ exports.default = void 0;
 //
 //
 var _default = {
-  name: 'tabs-pane'
+  name: 'tabs-pane',
+  inject: ['eventBus'],
+  data: function data() {
+    return {
+      active: false
+    };
+  },
+  props: {
+    name: {
+      type: String | Number,
+      required: true
+    }
+  },
+  computed: {
+    classes: function classes() {
+      return {
+        active: this.active
+      };
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    this.eventBus.$on('update:selected', function (name) {
+      _this.active = name === _this.name;
+    });
+  }
 };
 exports.default = _default;
         var $6763ed = exports.default || module.exports;
@@ -12903,7 +12993,14 @@ exports.default = _default;
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "tabs-pane" }, [_vm._t("default")], 2)
+  return _vm.active
+    ? _c(
+        "div",
+        { staticClass: "tabs-pane", class: _vm.classes },
+        [_vm._t("default")],
+        2
+      )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -13020,10 +13117,7 @@ _vue.default.use(_plugin.default);
 new _vue.default({
   el: '#app',
   data: {
-    loading1: false,
-    loading2: true,
-    loading3: false,
-    message: 'hi'
+    selectedTab: "man"
   },
   methods: {} // mounted() {
   //     this.$toast('货他内解决大V深V浑身都会立方米让你',{
@@ -13067,7 +13161,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49876" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50006" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

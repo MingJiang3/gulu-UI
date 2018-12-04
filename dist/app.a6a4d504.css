@@ -668,3 +668,22 @@
   align-items: center;
   margin-left: 14px;
 }
+.tabs-head[data-v-a419eb] {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid red;
+  min-height: 40px;
+}
+.tabs-head .action-wrapper[data-v-a419eb] {
+  margin-left: auto;
+}
+.tabs-item[data-v-b3b755] {
+  padding: 0 2em;
+}
+.tabs-item.active[data-v-b3b755] {
+  background: red;
+}
+.tabs-pane.active[data-v-6763ed] {
+  background: red;
+}
