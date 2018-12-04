@@ -674,9 +674,17 @@
   align-items: center;
   border: 1px solid red;
   height: 40px;
+  position: relative;
 }
-.tabs-head .action-wrapper[data-v-a419eb] {
+.tabs-head > .action-wrapper[data-v-a419eb] {
   margin-left: auto;
+  padding: 0 2em;
+}
+.tabs-head > .line[data-v-a419eb] {
+  position: absolute;
+  bottom: 0;
+  border-bottom: 3px solid black;
+  width: 20px;
 }
 .tabs-item[data-v-b3b755] {
   padding: 0 2em;
@@ -687,7 +695,8 @@
   display: flex;
 }
 .tabs-item.active[data-v-b3b755] {
-  background: red;
+  font-weight: bold;
+  color: cornflowerblue;
 }
 .tabs-pane.active[data-v-6763ed] {
   background: red;

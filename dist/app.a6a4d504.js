@@ -12637,8 +12637,19 @@ var _default = {
     };
   },
   mounted: function mounted() {
-    // tabs组件必修要触发selected事件,才能使 .sync 修饰符有用
-    this.eventBus.$emit('update:selected', this.selected);
+    var _this = this;
+
+    // console.log(this.$children);
+    this.$children.forEach(function (vm) {
+      if (vm.$options.name === 'guluTabsHead') {
+        vm.$children.forEach(function (childVm) {
+          if (childVm.$options.name === 'guluTabsItem' && childVm.name === _this.selected) {
+            // tabs组件必修要触发selected事件,才能使 .sync 修饰符有用
+            _this.eventBus.$emit('update:selected', _this.selected, childVm);
+          }
+        });
+      }
+    });
   }
 };
 exports.default = _default;
@@ -12704,10 +12715,15 @@ exports.default = void 0;
 //
 //
 //
+//
 var _default = {
   name: 'guluTabsHead',
   inject: ['eventBus'],
-  created: function created() {}
+  mounted: function mounted() {
+    this.eventBus.$on('update:selected', function (item, vm) {
+      console.log(vm);
+    });
+  }
 };
 exports.default = _default;
         var $a419eb = exports.default || module.exports;
@@ -12727,6 +12743,8 @@ exports.default = _default;
     { staticClass: "tabs-head" },
     [
       _vm._t("default"),
+      _vm._v(" "),
+      _c("div", { ref: "line", staticClass: "line" }),
       _vm._v(" "),
       _c("div", { staticClass: "action-wrapper" }, [_vm._t("actions")], 2)
     ],
@@ -12875,8 +12893,8 @@ var _default = {
     });
   },
   methods: {
-    xxx: function xxx() {
-      this.eventBus.$emit('update:selected', this.name);
+    onClick: function onClick() {
+      this.eventBus.$emit('update:selected', this.name, this);
     }
   }
 };
@@ -12895,7 +12913,11 @@ exports.default = _default;
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "tabs-item", class: _vm.classes, on: { click: _vm.xxx } },
+    {
+      staticClass: "tabs-item",
+      class: _vm.classes,
+      on: { click: _vm.onClick }
+    },
     [_vm._t("default")],
     2
   )
@@ -13159,7 +13181,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49906" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49947" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
