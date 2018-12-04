@@ -31,11 +31,7 @@
         },
         created() {
             this.eventBus.$on('update:selected', (name) => {
-                if (name === this.name) {
-                    this.active = true
-                } else {
-                    this.active = false
-                }
+                this.active = name === this.name;
             })
         },
         methods:{
@@ -48,6 +44,11 @@
 <style lang="scss" scoped>
     .tabs-item {
         padding: 0 2em;
+        flex-shrink: 0;
+        height: 100%;
+        cursor: pointer;
+        align-items: center;
+        display: flex;
         &.active {
             background: red;
         }

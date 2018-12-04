@@ -44,7 +44,9 @@ new Vue({
         selectedTab:"man"
     },
     methods: {
-
+        yyy(){
+            console.log('111');
+        }
     }
     // mounted() {
     //     this.$toast('货他内解决大V深V浑身都会立方米让你',{

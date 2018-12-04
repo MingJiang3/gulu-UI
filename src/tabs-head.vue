@@ -11,7 +11,6 @@
         name:'guluTabsHead',
         inject:['eventBus'],
         created(){
-            this.eventBus.$on('update:selected','head')
         }
     }
 </script>
@@ -22,7 +21,7 @@
         justify-content: flex-start;
         align-items: center;
         border: 1px solid red;
-        min-height: $tab-height;
+        height: $tab-height;
         .action-wrapper{
             margin-left: auto;
         }

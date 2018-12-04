@@ -673,13 +673,18 @@
   justify-content: flex-start;
   align-items: center;
   border: 1px solid red;
-  min-height: 40px;
+  height: 40px;
 }
 .tabs-head .action-wrapper[data-v-a419eb] {
   margin-left: auto;
 }
 .tabs-item[data-v-b3b755] {
   padding: 0 2em;
+  flex-shrink: 0;
+  height: 100%;
+  cursor: pointer;
+  align-items: center;
+  display: flex;
 }
 .tabs-item.active[data-v-b3b755] {
   background: red;

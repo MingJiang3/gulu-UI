@@ -12707,9 +12707,7 @@ exports.default = void 0;
 var _default = {
   name: 'guluTabsHead',
   inject: ['eventBus'],
-  created: function created() {
-    this.eventBus.$on('update:selected', 'head');
-  }
+  created: function created() {}
 };
 exports.default = _default;
         var $a419eb = exports.default || module.exports;
@@ -12873,11 +12871,7 @@ var _default = {
     var _this = this;
 
     this.eventBus.$on('update:selected', function (name) {
-      if (name === _this.name) {
-        _this.active = true;
-      } else {
-        _this.active = false;
-      }
+      _this.active = name === _this.name;
     });
   },
   methods: {
@@ -13119,7 +13113,11 @@ new _vue.default({
   data: {
     selectedTab: "man"
   },
-  methods: {} // mounted() {
+  methods: {
+    yyy: function yyy() {
+      console.log('111');
+    }
+  } // mounted() {
   //     this.$toast('货他内解决大V深V浑身都会立方米让你',{
   //             autoClose:9,
   //             position:'bottom',
@@ -13161,7 +13159,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50006" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49906" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
