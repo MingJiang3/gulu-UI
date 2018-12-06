@@ -706,10 +706,36 @@
 .tabs-pane[data-v-6763ed] {
   padding: 1em;
 }
-popover[data-v-6fe5b4] {
-  position: absolute;
-}
-popover .content-wrapper[data-v-6fe5b4] {
+.popover[data-v-6fe5b4] {
+  display: inline-block;
   position: relative;
-  max-width: 20em;
+}
+.popover .button[data-v-6fe5b4] {
+  display: inline-block;
+}
+.content-wrapper[data-v-6fe5b4] {
+  position: absolute;
+  border-radius: 4px;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  max-width: 25em;
+  transform: translateY(-100%);
+  padding: 0.5em 1em;
+  margin-top: -10px;
+  word-break: break-all;
+}
+.content-wrapper[data-v-6fe5b4]::before, .content-wrapper[data-v-6fe5b4]::after {
+  position: absolute;
+  content: "";
+  display: block;
+  border: 10px solid transparent;
+  border-top-color: #c9c9c9;
+  width: 0px;
+  height: 0px;
+}
+.content-wrapper[data-v-6fe5b4]::before {
+  top: 100%;
+}
+.content-wrapper[data-v-6fe5b4]::after {
+  top: calc(100% - 1px);
+  border-top-color: white;
 }

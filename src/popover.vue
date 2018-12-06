@@ -63,14 +63,38 @@
 </script>
 
 <style lang="scss" scoped>
-    popover {
-        position: absolute;
-        .content-wrapper {
-            position: relative;
-            max-width: 20em;
-        }
-        .button {
+    .popover {
+        display: inline-block;
+        position: relative;
 
+        .button {
+            display: inline-block;
+        }
+    }
+    .content-wrapper {
+        position: absolute;
+        border-radius: 4px;
+        box-shadow: 0 0 3px rgba(0,0,0,0.5);
+        max-width: 25em;
+        transform: translateY(-100%);
+        padding: 0.5em 1em;
+        margin-top: -10px;
+        word-break: break-all;
+        &::before,&::after{
+            position: absolute;
+            content: '';
+            display: block;
+            border: 10px solid transparent;
+            border-top-color: #c9c9c9;
+            width: 0px;
+            height: 0px;
+        }
+        &::before{
+            top: 100%;
+        }
+        &::after{
+            top: calc(100% - 1px);
+            border-top-color: white;
         }
     }
 </style>
