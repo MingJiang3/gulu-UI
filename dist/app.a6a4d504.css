@@ -705,11 +705,11 @@
 }
 .tabs-pane[data-v-6763ed] {
   padding: 1em;
-}/*.popover{*/
-/*position: absolute;*/
-/*> .content-wrapper{*/
-/*}*/
-/*> .button{*/
-/*position: relative;*/
-/*}*/
-/*}*/
+}
+popover[data-v-6fe5b4] {
+  position: absolute;
+}
+popover .content-wrapper[data-v-6fe5b4] {
+  position: relative;
+  max-width: 20em;
+}

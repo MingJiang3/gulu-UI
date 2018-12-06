@@ -13101,38 +13101,46 @@ var _default = {
     };
   },
   methods: {
-    openAndClose: function openAndClose(e) {
+    positionContent: function positionContent() {
+      document.body.appendChild(this.$refs.contentWrapper);
+
+      var _this$$refs$triggerWr = this.$refs.triggerWrapper.getBoundingClientRect(),
+          width = _this$$refs$triggerWr.width,
+          height = _this$$refs$triggerWr.height,
+          top = _this$$refs$triggerWr.top,
+          left = _this$$refs$triggerWr.left;
+
+      this.$refs.contentWrapper.style.left = left + 'px';
+      this.$refs.contentWrapper.style.top = top + 'px';
+    },
+    eventHandler: function eventHandler(e2) {
+      if (this.$refs.popover && (this.$refs.popover === e2.target || this.$refs.popover.contains(e2.target))) {
+        return;
+      }
+
+      this.close();
+    },
+    opens: function opens() {
       var _this = this;
 
+      this.visible = true;
+      this.$nextTick(function () {
+        _this.positionContent();
+
+        document.addEventListener('click', _this.eventHandler);
+      });
+    },
+    close: function close() {
+      this.visible = false;
+      document.removeEventListener('click', this.eventHandler);
+    },
+    openAndClose: function openAndClose(e) {
       if (this.$refs.triggerWrapper.contains(e.target)) {
-        console.log(e.target);
-        this.visible = !this.visible;
-
-        if (this.visible) {
-          this.$nextTick(function () {
-            document.body.appendChild(_this.$refs.contentWrapper);
-
-            var _this$$refs$triggerWr = _this.$refs.triggerWrapper.getBoundingClientRect(),
-                width = _this$$refs$triggerWr.width,
-                height = _this$$refs$triggerWr.height,
-                top = _this$$refs$triggerWr.top,
-                left = _this$$refs$triggerWr.left;
-
-            _this.$refs.contentWrapper.style.left = left + 'px';
-            _this.$refs.contentWrapper.style.top = top + 'px';
-
-            var eventHandler = function eventHandler(e2) {
-              if (_this.$refs.contentWrapper.contains(e2.target)) {} else {
-                _this.visible = false;
-                document.removeEventListener('click', eventHandler);
-              }
-            };
-
-            document.addEventListener('click', eventHandler);
-          });
+        if (this.visible === true) {
+          this.close();
+        } else {
+          this.opens();
         }
-      } else {
-        console.log('11');
       }
     }
   }
@@ -13152,7 +13160,7 @@ exports.default = _default;
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "popover", on: { click: _vm.openAndClose } },
+    { ref: "popover", staticClass: "popover", on: { click: _vm.openAndClose } },
     [
       _vm.visible
         ? _c(
@@ -13293,11 +13301,7 @@ new _vue.default({
   data: {
     selectedTab: "man"
   },
-  methods: {
-    yyy: function yyy() {
-      console.log('111');
-    }
-  } // mounted() {
+  methods: {} // mounted() {
   //     this.$toast('货他内解决大V深V浑身都会立方米让你',{
   //             autoClose:9,
   //             position:'bottom',
@@ -13339,7 +13343,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51365" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49896" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
