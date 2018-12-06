@@ -30,70 +30,73 @@
         }
 
         /*#app {*/
-            /*margin: 20px 20px;*/
-            /*border: 1px solid black;*/
+        /*margin: 20px 20px;*/
+        /*border: 1px solid black;*/
         /*}*/
     </style>
 </head>
 
 <body>
 <div id="app">
-    <g-tabs :selected.sync="selectedTab" @update:selected="yyy">
-        <!--<g-tabs selected="selectedTabs" @update:selected="selectedTab = $event">&lt;!&ndash;上面等同于这里&ndash;&gt;-->
-        <g-tabs-head>
-            <g-tabs-item name="women" disabled>美女</g-tabs-item>
-            <g-tabs-item name="man">帅哥</g-tabs-item>
-            <g-tabs-item name="manwo">人妖</g-tabs-item>
-        </g-tabs-head>
-        <g-tabs-body>
-            <g-tabs-pane name="women">11</g-tabs-pane>
-            <g-tabs-pane name="man">22</g-tabs-pane>
-            <g-tabs-pane name="manwo">33</g-tabs-pane>
-        </g-tabs-body>
-    </g-tabs>
-    <!--<div style="border: 1px solid black">-->
-        <!--<g-layout style="height: 100vh">-->
-            <!--<g-sider class="demo" style="width: 200px;">sider</g-sider>-->
-            <!--<g-layout>-->
-                <!--<g-header class="demo">header</g-header>-->
-                <!--<g-content class="demo">content</g-content>-->
-                <!--<g-footer class="demo">footer</g-footer>-->
-            <!--</g-layout>-->
-        <!--</g-layout>-->
-        <!--<g-row>-->
-            <!--<g-col span="1" offset="2" :phone="{span:12}">1</g-col>-->
-            <!--<g-col span="20" :phone="{span:12}">2</g-col>-->
-        <!--</g-row>-->
-        <!--<g-row>-->
-            <!--<g-col span="2">1</g-col>-->
-            <!--<g-col span="20" offset="2">2</g-col>-->
-        <!--</g-row>-->
-        <!--<g-row align="right" style="border: 1px solid red">-->
-            <!--<g-col>1</g-col>-->
-            <!--<g-col>2</g-col>-->
-            <!--<g-col>3</g-col>-->
-            <!--<g-col>4</g-col>-->
-        <!--</g-row>-->
-        <!-- <g-input value="李四" disabled></g-input>
-        <g-input value="张三" readonly></g-input>
-        <g-input value="王五"></g-input>
-        <g-input value="王" error="姓名不能少于2个字"></g-input> -->
-        <!--<div>-->
-            <!--<g-input value="王" @change="inputChange" v-model="message"></g-input>-->
-            <!--<p>{{message}}</p>-->
-        <!--</div>-->
-        <!--<div style="margin: 20px 0">-->
-            <!--<g-button :loading="loading1" @click="loading1 = !loading1">按钮</g-button>-->
-            <!--<g-button icon="set" :loading="loading2" @click="loading2 = !loading2">按钮</g-button>-->
-            <!--<g-button icon="set" icon-position="right" :loading="loading3" @click="loading3 = !loading3">按钮</g-button>-->
-
-            <!--<g-button-group>-->
-                <!--<g-button icon="left">上一页</g-button>-->
-                <!--<g-button>更多</g-button>-->
-                <!--<g-button icon="right" icon-position="right">下一页</g-button>-->
-            <!--</g-button-group>-->
-        <!--</div>-->
+    <div style="padding: 150px;">
+        <g-popover style=" border: 1px solid red">
+            <template slot="content">
+                <div>股份就是给你看</div>
+            </template>
+            <g-button>点我</g-button>
+        </g-popover>
     </div>
+
+    <!--<g-tabs :selected.sync="selectedTab" @update:selected="yyy">-->
+    <!--&lt;!&ndash;<g-tabs selected="selectedTabs" @update:selected="selectedTab = $event">&lt;!&ndash;上面等同于这里&ndash;&gt;&ndash;&gt;-->
+    <!--<g-tabs-head>-->
+    <!--<g-tabs-item name="women" disabled>美女</g-tabs-item>-->
+    <!--<g-tabs-item name="man">帅哥</g-tabs-item>-->
+    <!--<g-tabs-item name="manwo">人妖</g-tabs-item>-->
+    <!--</g-tabs-head>-->
+    <!--<g-tabs-body>-->
+    <!--<g-tabs-pane name="women">11</g-tabs-pane>-->
+    <!--<g-tabs-pane name="man">22</g-tabs-pane>-->
+    <!--<g-tabs-pane name="manwo">33</g-tabs-pane>-->
+    <!--</g-tabs-body>-->
+    <!--</g-tabs>-->
+    <!--<div style="border: 1px solid black">-->
+    <!--<g-layout style="height: 100vh">-->
+    <!--<g-sider class="demo" style="width: 200px;">sider</g-sider>-->
+    <!--<g-layout>-->
+    <!--<g-header class="demo">header</g-header>-->
+    <!--<g-content class="demo">content</g-content>-->
+    <!--<g-footer class="demo">footer</g-footer>-->
+    <!--</g-layout>-->
+    <!--</g-layout>-->
+    <!--<g-row>-->
+    <!--<g-col span="1" offset="2" :phone="{span:12}">1</g-col>-->
+    <!--<g-col span="20" :phone="{span:12}">2</g-col>-->
+    <!--</g-row>-->
+    <!--<g-row>-->
+    <!--<g-col span="2">1</g-col>-->
+    <!--<g-col span="20" offset="2">2</g-col>-->
+    <!--</g-row>-->
+    <!--<g-row align="right" style="border: 1px solid red">-->
+    <!--<g-col>1</g-col>-->
+    <!--<g-col>2</g-col>-->
+    <!--<g-col>3</g-col>-->
+    <!--<g-col>4</g-col>-->
+    <!--</g-row>-->
+    <!-- <g-input value="李四" disabled></g-input>
+    <g-input value="张三" readonly></g-input>
+    <g-input value="王五"></g-input>
+    <g-input value="王" error="姓名不能少于2个字"></g-input> -->
+    <!--<div>-->
+    <!--<g-input value="王" @change="inputChange" v-model="message"></g-input>-->
+    <!--<p>{{message}}</p>-->
+    <!--</div>-->
+    <!--<div style="margin: 20px 0">-->
+    <!--<g-button :loading="loading1" @click="loading1 = !loading1">按钮</g-button>-->
+    <!--<g-button icon="set" :loading="loading2" @click="loading2 = !loading2">按钮</g-button>-->
+    <!--<g-button icon="set" icon-position="right" :loading="loading3" @click="loading3 = !loading3">按钮</g-button>-->
+    <!--</div>-->
+</div>
 </div>
 
 <script src="./src/app.js"></script>

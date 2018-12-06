@@ -20,11 +20,11 @@ describe('Tabs', () => {
     it('存在.', () => {
         expect(Tabs).to.be.exist
     })
-    it('子组件只能为tabs-heade和tabs-body ', () => {
+    it('子组件只能为tabs-heade和tabs-body ', (done) => {
         const div = document.createElement('div');
         document.body.appendChild(div);
         div.innerHTML = `
-            <g-tabs :selected="man">
+            <g-tabs selected="man">
                  <g-tabs-head>
                     <g-tabs-item name="women" disabled>美女</g-tabs-item>
                     <g-tabs-item name="man">帅哥</g-tabs-item>
@@ -39,7 +39,10 @@ describe('Tabs', () => {
         let vm = new Vue({
             el: div
         })
-
+        setTimeout(()=>{
+            console.log(vm.$el.outerText);
+            done()
+        },500)
     });
     // it('接受autoClose ', (done) => {
     //     const div = document.createElement('div')

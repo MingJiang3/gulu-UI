@@ -13066,6 +13066,145 @@ render._withStripped = true
       
       }
     })();
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.common.js"}],"src/popover.vue":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = {
+  name: "guluPopover",
+  props: {
+    position: {
+      type: String,
+      default: 'top',
+      validator: function validator(value) {
+        return ['top', 'bottom', 'left', 'right'].indexOf(value) >= 0;
+      }
+    }
+  },
+  data: function data() {
+    return {
+      visible: false
+    };
+  },
+  methods: {
+    openAndClose: function openAndClose(e) {
+      var _this = this;
+
+      if (this.$refs.triggerWrapper.contains(e.target)) {
+        console.log(e.target);
+        this.visible = !this.visible;
+
+        if (this.visible) {
+          this.$nextTick(function () {
+            document.body.appendChild(_this.$refs.contentWrapper);
+
+            var _this$$refs$triggerWr = _this.$refs.triggerWrapper.getBoundingClientRect(),
+                width = _this$$refs$triggerWr.width,
+                height = _this$$refs$triggerWr.height,
+                top = _this$$refs$triggerWr.top,
+                left = _this$$refs$triggerWr.left;
+
+            _this.$refs.contentWrapper.style.left = left + 'px';
+            _this.$refs.contentWrapper.style.top = top + 'px';
+
+            var eventHandler = function eventHandler(e2) {
+              if (_this.$refs.contentWrapper.contains(e2.target)) {} else {
+                _this.visible = false;
+                document.removeEventListener('click', eventHandler);
+              }
+            };
+
+            document.addEventListener('click', eventHandler);
+          });
+        }
+      } else {
+        console.log('11');
+      }
+    }
+  }
+};
+exports.default = _default;
+        var $6fe5b4 = exports.default || module.exports;
+      
+      if (typeof $6fe5b4 === 'function') {
+        $6fe5b4 = $6fe5b4.options;
+      }
+    
+        /* template */
+        Object.assign($6fe5b4, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "popover", on: { click: _vm.openAndClose } },
+    [
+      _vm.visible
+        ? _c(
+            "div",
+            { ref: "contentWrapper", staticClass: "content-wrapper" },
+            [_vm._t("content")],
+            2
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "span",
+        { ref: "triggerWrapper", staticClass: "button" },
+        [_vm._t("default")],
+        2
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: "data-v-6fe5b4",
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$6fe5b4', $6fe5b4);
+          } else {
+            api.reload('$6fe5b4', $6fe5b4);
+          }
+        }
+
+        
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+      }
+    })();
 },{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.common.js"}],"src/app.js":[function(require,module,exports) {
 "use strict";
 
@@ -13107,6 +13246,8 @@ var _tabsItem = _interopRequireDefault(require("./tabs-item"));
 
 var _tabsPane = _interopRequireDefault(require("./tabs-pane"));
 
+var _popover = _interopRequireDefault(require("./popover"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue.default.component('g-button', _button.default);
@@ -13143,6 +13284,8 @@ _vue.default.component('g-tabs-item', _tabsItem.default);
 
 _vue.default.component('g-tabs-pane', _tabsPane.default);
 
+_vue.default.component('g-popover', _popover.default);
+
 _vue.default.use(_plugin.default);
 
 new _vue.default({
@@ -13169,7 +13312,7 @@ new _vue.default({
   // }
 
 });
-},{"vue":"node_modules/vue/dist/vue.common.js","./button":"src/button.vue","./icon":"src/icon.vue","./buttonGroup":"src/buttonGroup.vue","./input":"src/input.vue","./row":"src/row.vue","./col":"src/col.vue","./header":"src/header.vue","./footer":"src/footer.vue","./content":"src/content.vue","./sider":"src/sider.vue","./layout":"src/layout.vue","./toast":"src/toast.vue","./plugin":"src/plugin.js","./tabs":"src/tabs.vue","./tabs-head":"src/tabs-head.vue","./tabs-body":"src/tabs-body.vue","./tabs-item":"src/tabs-item.vue","./tabs-pane":"src/tabs-pane.vue"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"vue":"node_modules/vue/dist/vue.common.js","./button":"src/button.vue","./icon":"src/icon.vue","./buttonGroup":"src/buttonGroup.vue","./input":"src/input.vue","./row":"src/row.vue","./col":"src/col.vue","./header":"src/header.vue","./footer":"src/footer.vue","./content":"src/content.vue","./sider":"src/sider.vue","./layout":"src/layout.vue","./toast":"src/toast.vue","./plugin":"src/plugin.js","./tabs":"src/tabs.vue","./tabs-head":"src/tabs-head.vue","./tabs-body":"src/tabs-body.vue","./tabs-item":"src/tabs-item.vue","./tabs-pane":"src/tabs-pane.vue","./popover":"src/popover.vue"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -13196,7 +13339,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49947" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51365" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
