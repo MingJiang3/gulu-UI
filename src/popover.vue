@@ -30,12 +30,12 @@
             positionContent() {
                 document.body.appendChild(this.$refs.contentWrapper)
                 let {width, height, top, left} = this.$refs.triggerWrapper.getBoundingClientRect()
-                this.$refs.contentWrapper.style.left = left + 'px'
-                this.$refs.contentWrapper.style.top = top + 'px'
+                this.$refs.contentWrapper.style.left = left + scrollX + 'px'
+                this.$refs.contentWrapper.style.top = top + scrollY + 'px'
             },
-            eventHandler(e2){
-                if (this.$refs.popover && (this.$refs.popover === e2.target || this.$refs.popover.contains(e2.target))) {
-                    return;}
+            eventHandler(e2) {
+                if (this.$refs.popover && (this.$refs.popover === e2.target || this.$refs.popover.contains(e2.target))) {return;}
+                if (this.$refs.contentWrapper && (this.$refs.contentWrapper === e2.target || this.$refs.contentWrapper.contains(e2.target))){return}
                 this.close()
             },
             opens() {
@@ -45,7 +45,7 @@
                     document.addEventListener('click', this.eventHandler)
                 })
             },
-            close(){
+            close() {
                 this.visible = false
                 document.removeEventListener('click', this.eventHandler)
             },
@@ -53,7 +53,7 @@
                 if (this.$refs.triggerWrapper.contains(e.target)) {
                     if (this.visible === true) {
                         this.close()
-                    }else{
+                    } else {
                         this.opens()
                     }
                 }
@@ -71,16 +71,17 @@
             display: inline-block;
         }
     }
+
     .content-wrapper {
         position: absolute;
         border-radius: 4px;
-        box-shadow: 0 0 3px rgba(0,0,0,0.5);
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
         max-width: 25em;
         transform: translateY(-100%);
         padding: 0.5em 1em;
         margin-top: -10px;
         word-break: break-all;
-        &::before,&::after{
+        &::before, &::after {
             position: absolute;
             content: '';
             display: block;
@@ -89,10 +90,10 @@
             width: 0px;
             height: 0px;
         }
-        &::before{
+        &::before {
             top: 100%;
         }
-        &::after{
+        &::after {
             top: calc(100% - 1px);
             border-top-color: white;
         }

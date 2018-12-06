@@ -13110,11 +13110,15 @@ var _default = {
           top = _this$$refs$triggerWr.top,
           left = _this$$refs$triggerWr.left;
 
-      this.$refs.contentWrapper.style.left = left + 'px';
-      this.$refs.contentWrapper.style.top = top + 'px';
+      this.$refs.contentWrapper.style.left = left + scrollX + 'px';
+      this.$refs.contentWrapper.style.top = top + scrollY + 'px';
     },
     eventHandler: function eventHandler(e2) {
       if (this.$refs.popover && (this.$refs.popover === e2.target || this.$refs.popover.contains(e2.target))) {
+        return;
+      }
+
+      if (this.$refs.contentWrapper && (this.$refs.contentWrapper === e2.target || this.$refs.contentWrapper.contains(e2.target))) {
         return;
       }
 
