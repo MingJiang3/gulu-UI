@@ -13095,8 +13095,6 @@ var _default = {
       }
     }
   },
-  mounted: function mounted() {// console.log(this.position);
-  },
   data: function data() {
     return {
       visible: false
@@ -13104,32 +13102,40 @@ var _default = {
   },
   methods: {
     positionContent: function positionContent() {
-      document.body.appendChild(this.$refs.contentWrapper);
+      var _this$$refs = this.$refs,
+          contentWrapper = _this$$refs.contentWrapper,
+          triggerWrapper = _this$$refs.triggerWrapper;
+      document.body.appendChild(contentWrapper);
 
-      var _this$$refs$triggerWr = this.$refs.triggerWrapper.getBoundingClientRect(),
-          width = _this$$refs$triggerWr.width,
-          height = _this$$refs$triggerWr.height,
-          top = _this$$refs$triggerWr.top,
-          left = _this$$refs$triggerWr.left;
+      var _triggerWrapper$getBo = triggerWrapper.getBoundingClientRect(),
+          width = _triggerWrapper$getBo.width,
+          height = _triggerWrapper$getBo.height,
+          top = _triggerWrapper$getBo.top,
+          left = _triggerWrapper$getBo.left;
 
-      var contentStyle = this.$refs.contentWrapper.style;
+      var _contentWrapper$getBo = contentWrapper.getBoundingClientRect(),
+          height2 = _contentWrapper$getBo.height;
 
-      var _this$$refs$contentWr = this.$refs.contentWrapper.getBoundingClientRect(),
-          height2 = _this$$refs$contentWr.height;
-
-      if (this.position === 'top') {
-        contentStyle.left = left + scrollX + 'px';
-        contentStyle.top = top + scrollY + 'px';
-      } else if (this.position === 'bottom') {
-        contentStyle.left = left + scrollX + 'px';
-        contentStyle.top = top + scrollY + height + 'px';
-      } else if (this.position === 'left') {
-        contentStyle.left = left + scrollX + 'px';
-        contentStyle.top = top + scrollY + (height - height2) / 2 + 'px';
-      } else if (this.position === 'right') {
-        contentStyle.left = left + scrollX + width + 'px';
-        contentStyle.top = top + scrollY + (height - height2) / 2 + 'px';
-      }
+      var positions = {
+        top: {
+          top: top + scrollY,
+          left: left + scrollX
+        },
+        bottom: {
+          top: top + scrollY + height,
+          left: left + scrollX
+        },
+        left: {
+          top: top + scrollY + (height - height2) / 2,
+          left: left + scrollX
+        },
+        right: {
+          top: top + scrollY + (height - height2) / 2,
+          left: left + scrollX + width
+        }
+      };
+      contentWrapper.style.left = positions[this.position].left + 'px';
+      contentWrapper.style.top = positions[this.position].top + 'px';
     },
     eventHandler: function eventHandler(e2) {
       if (this.$refs.popover && (this.$refs.popover === e2.target || this.$refs.popover.contains(e2.target))) {
