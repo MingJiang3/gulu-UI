@@ -13095,6 +13095,8 @@ var _default = {
       }
     }
   },
+  mounted: function mounted() {// console.log(this.position);
+  },
   data: function data() {
     return {
       visible: false
@@ -13110,8 +13112,24 @@ var _default = {
           top = _this$$refs$triggerWr.top,
           left = _this$$refs$triggerWr.left;
 
-      this.$refs.contentWrapper.style.left = left + scrollX + 'px';
-      this.$refs.contentWrapper.style.top = top + scrollY + 'px';
+      var contentStyle = this.$refs.contentWrapper.style;
+
+      var _this$$refs$contentWr = this.$refs.contentWrapper.getBoundingClientRect(),
+          height2 = _this$$refs$contentWr.height;
+
+      if (this.position === 'top') {
+        contentStyle.left = left + scrollX + 'px';
+        contentStyle.top = top + scrollY + 'px';
+      } else if (this.position === 'bottom') {
+        contentStyle.left = left + scrollX + 'px';
+        contentStyle.top = top + scrollY + height + 'px';
+      } else if (this.position === 'left') {
+        contentStyle.left = left + scrollX + 'px';
+        contentStyle.top = top + scrollY + (height - height2) / 2 + 'px';
+      } else if (this.position === 'right') {
+        contentStyle.left = left + scrollX + width + 'px';
+        contentStyle.top = top + scrollY + (height - height2) / 2 + 'px';
+      }
     },
     eventHandler: function eventHandler(e2) {
       if (this.$refs.popover && (this.$refs.popover === e2.target || this.$refs.popover.contains(e2.target))) {
@@ -13169,7 +13187,13 @@ exports.default = _default;
       _vm.visible
         ? _c(
             "div",
-            { ref: "contentWrapper", staticClass: "content-wrapper" },
+            {
+              ref: "contentWrapper",
+              staticClass: "content-wrapper",
+              class: ((_obj = {}),
+              (_obj["position-" + _vm.position] = true),
+              _obj)
+            },
             [_vm._t("content")],
             2
           )
@@ -13183,6 +13207,7 @@ exports.default = _default;
       )
     ]
   )
+  var _obj
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -36,8 +36,8 @@
 <body>
 <div id="app">
     <div style="padding: 100px; border: 1px solid red">
-        <div style="width: 1000px; height: 1000px;"></div>
-        <g-popover>
+
+        <g-popover position="bottom">
             <template slot="content">
                 <div>股份就是给你看</div>
             </template>
@@ -48,6 +48,19 @@
                 <div>股份就3423是给你看</div>
             </template>
             <g-button>点我2</g-button>
+        </g-popover>
+
+        <g-popover position="left">
+            <template slot="content">
+                <div>股份就3423是给你看</div>
+            </template>
+            <g-button>点我3</g-button>
+        </g-popover>
+        <g-popover position="right">
+            <template slot="content">
+                <div>股份就3423是给你看</div>
+            </template>
+            <g-button>点我4</g-button>
         </g-popover>
     </div>
 
