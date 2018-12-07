@@ -13220,7 +13220,7 @@ exports.default = _default;
             (_obj["position-" + _vm.position] = true),
             _obj)
           },
-          [_vm._t("content")],
+          [_vm._t("content", null, { close: _vm.close })],
           2
         )
       : _vm._e(),
@@ -13397,7 +13397,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51565" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49978" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
