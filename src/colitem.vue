@@ -1,6 +1,6 @@
 <template>
     <div class="colitem">
-        <div class="title" @click="opens = !opens">
+        <div class="title" @click="toggle">
             {{title}}
         </div>
         <div class="content" v-if="opens">
@@ -18,8 +18,30 @@
                 required: true
             }
         },
-        data(){
-            return{opens:false}
+        data() {
+            return {opens: false}
+        },
+        inject: ['eventBus'],
+        mounted() {
+            this.eventBus && this.eventBus.$on('update:selected', (vm) => {
+                if (vm !== this) {
+                    this.close()
+                }
+            })
+
+        },
+        methods: {
+            toggle() {
+                if (this.opens) {
+                    this.opens = false
+                } else {
+                    this.opens = true
+                    this.eventBus && this.eventBus.$emit('update:selected', this)
+                }
+            },
+            close(){
+                this.opens = false
+            }
         }
     }
 </script>
