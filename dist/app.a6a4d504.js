@@ -13274,6 +13274,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _vue = _interopRequireDefault(require("vue"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 //
 //
 //
@@ -13281,7 +13286,53 @@ exports.default = void 0;
 //
 //
 var _default = {
-  name: "guluCollapse"
+  name: "guluCollapse",
+  props: {
+    single: {
+      type: Boolean,
+      default: false
+    },
+    selected: {
+      type: Array
+    }
+  },
+  data: function data() {
+    return {
+      eventBus: new _vue.default()
+    };
+  },
+  provide: function provide() {
+    return {
+      eventBus: this.eventBus
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.eventBus.$emit('update:selected', this.selected);
+    this.eventBus.$on('update:addSelected', function (name) {
+      var selectedCopy = JSON.parse(JSON.stringify(_this.selected));
+
+      if (_this.single) {
+        selectedCopy = [name];
+      } else {
+        selectedCopy.push(name);
+      }
+
+      _this.eventBus.$emit('update:selected', selectedCopy);
+
+      _this.$emit('update:selected', selectedCopy);
+    });
+    this.eventBus.$on('update:removeSelected', function (name) {
+      var selectedCopy = JSON.parse(JSON.stringify(_this.selected));
+      var index = selectedCopy.indexOf(name);
+      selectedCopy.splice(index, 1);
+
+      _this.eventBus.$emit('update:selected', selectedCopy);
+
+      _this.$emit('update:selected', selectedCopy);
+    });
+  }
 };
 exports.default = _default;
         var $9484df = exports.default || module.exports;
@@ -13331,7 +13382,7 @@ render._withStripped = true
       
       }
     })();
-},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.common.js"}],"src/colitem.vue":[function(require,module,exports) {
+},{"vue":"node_modules/vue/dist/vue.common.js","_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js"}],"src/colitem.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -13355,12 +13406,38 @@ var _default = {
     title: {
       type: String,
       required: true
+    },
+    name: {
+      type: String,
+      required: true
     }
   },
   data: function data() {
     return {
-      opens: false
+      opens: false,
+      single: false
     };
+  },
+  inject: ['eventBus'],
+  mounted: function mounted() {
+    var _this = this;
+
+    this.eventBus && this.eventBus.$on('update:selected', function (names) {
+      if (names.indexOf(_this.name) >= 0) {
+        _this.opens = true;
+      } else {
+        _this.opens = false;
+      }
+    });
+  },
+  methods: {
+    toggle: function toggle() {
+      if (this.opens) {
+        this.eventBus && this.eventBus.$emit('update:removeSelected', this.name);
+      } else {
+        this.eventBus && this.eventBus.$emit('update:addSelected', this.name);
+      }
+    }
   }
 };
 exports.default = _default;
@@ -13377,18 +13454,9 @@ exports.default = _default;
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "colitem" }, [
-    _c(
-      "div",
-      {
-        staticClass: "title",
-        on: {
-          click: function($event) {
-            _vm.opens = !_vm.opens
-          }
-        }
-      },
-      [_vm._v("\n        " + _vm._s(_vm.title) + "\n    ")]
-    ),
+    _c("div", { staticClass: "title", on: { click: _vm.toggle } }, [
+      _vm._v("\n        " + _vm._s(_vm.title) + "\n    ")
+    ]),
     _vm._v(" "),
     _vm.opens
       ? _c("div", { staticClass: "content" }, [_vm._t("default")], 2)
@@ -13522,7 +13590,7 @@ _vue.default.use(_plugin.default);
 new _vue.default({
   el: '#app',
   data: {
-    selectedTab: "man"
+    selectedTab: []
   },
   methods: {} // mounted() {
   //     this.$toast('货他内解决大V深V浑身都会立方米让你',{
@@ -13566,7 +13634,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50127" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54477" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

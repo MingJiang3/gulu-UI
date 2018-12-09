@@ -48,7 +48,7 @@ Vue.use(Plugin)
 new Vue({
     el: '#app',
     data: {
-        selectedTab:"man"
+        selectedTab:[]
     },
     methods: {
 

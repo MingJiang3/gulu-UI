@@ -36,10 +36,10 @@
 <body>
 <div id="app">
     <div style="padding: 100px; border: 1px solid red">
-        <g-collapse>
-            <g-col-item title="标签1">跟跟暗黑十多个</g-col-item>
-            <g-col-item title="标签2">跟跟暗黑十多个</g-col-item>
-            <g-col-item title="标签3">跟跟暗黑十多个</g-col-item>
+        <g-collapse :selected.sync="selectedTab" single="">
+            <g-col-item title="标签1" name="1">跟跟暗黑十多个</g-col-item>
+            <g-col-item title="标签2" name="2">跟跟暗黑十多个</g-col-item>
+            <g-col-item title="标签3" name="3">跟跟暗黑十多个</g-col-item>
         </g-collapse>
 
     </div>

@@ -16,16 +16,22 @@
             title: {
                 type: String,
                 required: true
+            },
+            name: {
+                type: String,
+                required: true
             }
         },
         data() {
-            return {opens: false}
+            return {opens: false, single: false}
         },
         inject: ['eventBus'],
         mounted() {
-            this.eventBus && this.eventBus.$on('update:selected', (vm) => {
-                if (vm !== this) {
-                    this.close()
+            this.eventBus && this.eventBus.$on('update:selected', (names) => {
+                if (names.indexOf(this.name) >= 0) {
+                    this.opens = true
+                } else {
+                    this.opens = false
                 }
             })
 
@@ -33,14 +39,10 @@
         methods: {
             toggle() {
                 if (this.opens) {
-                    this.opens = false
+                    this.eventBus && this.eventBus.$emit('update:removeSelected', this.name)
                 } else {
-                    this.opens = true
-                    this.eventBus && this.eventBus.$emit('update:selected', this)
+                    this.eventBus && this.eventBus.$emit('update:addSelected', this.name)
                 }
-            },
-            close(){
-                this.opens = false
             }
         }
     }
